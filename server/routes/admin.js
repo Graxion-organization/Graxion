@@ -2,8 +2,12 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import Admin from '../models/Admin.js';
 import { protect } from '../middleware/auth.js';
+import { ipProtection } from '../middleware/ipProtection.js';
 
 const router = express.Router();
+
+// Apply IP and Location based protection to ALL admin routes
+router.use(ipProtection);
 
 /**
  * Generate JWT token
