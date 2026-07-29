@@ -18,8 +18,22 @@ connectDB();
 const app = express();
 
 // CORS
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://graxion.in',
+  'https://www.graxion.in',
+  process.env.CLIENT_URL && process.env.CLIENT_URL.replace(/\/$/, "") // Remove trailing slash if present
+].filter(Boolean);
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      console.error('CORS blocked request from origin:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
 
