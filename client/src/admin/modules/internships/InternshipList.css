@@ -1,0 +1,198 @@
+/* ============================================
+   GRAXION ADMIN — Internship List
+   ============================================ */
+
+.internship-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Header ── */
+.il-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.il-header h1 {
+  font-size: var(--text-h3);
+  font-weight: var(--fw-bold);
+  margin-bottom: 4px;
+}
+
+.il-header p {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-secondary);
+}
+
+.il-header .admin-btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Filters ── */
+.il-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.il-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-muted);
+}
+
+.il-filter-group select {
+  padding: 8px 32px 8px 12px;
+  background: var(--color-bg-glass);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: var(--text-small);
+  font-family: var(--font-family);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239494b0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+.il-filter-group select:focus {
+  border-color: var(--color-accent-cyan);
+}
+
+.il-filter-group select option {
+  background: var(--color-bg-secondary);
+}
+
+.il-bulk-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  font-size: var(--text-small);
+  color: var(--color-accent-cyan);
+}
+
+.danger-text {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-accent-rose) !important;
+  border-color: rgba(244, 63, 94, 0.2) !important;
+}
+
+.danger-text:hover {
+  background: rgba(244, 63, 94, 0.08) !important;
+}
+
+/* ── Cell Styles ── */
+.il-student-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.il-student-avatar {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-gradient-primary);
+  border-radius: var(--radius-full);
+  color: var(--color-bg-primary);
+  font-size: var(--text-caption);
+  font-weight: var(--fw-bold);
+}
+
+.il-student-name {
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+}
+
+.il-student-id {
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+  font-family: monospace;
+}
+
+.il-domain-tag {
+  display: inline-block;
+  padding: 3px 8px;
+  background: rgba(124, 58, 237, 0.08);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-caption);
+  color: var(--color-accent-purple);
+  white-space: nowrap;
+}
+
+.il-cert-id {
+  font-family: monospace;
+  font-size: var(--text-caption);
+  color: var(--color-accent-cyan);
+  padding: 3px 6px;
+  background: rgba(0, 212, 255, 0.06);
+  border-radius: var(--radius-sm);
+}
+
+.il-issue-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: var(--radius-sm);
+  color: var(--color-accent-cyan);
+  font-size: var(--text-caption);
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.il-issue-btn:hover {
+  background: rgba(0, 212, 255, 0.15);
+}
+
+/* ── Actions ── */
+.il-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.il-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.il-action-btn:hover {
+  border-color: var(--color-border);
+  color: var(--color-accent-cyan);
+  background: var(--color-bg-glass);
+}
+
+.il-action-btn.danger:hover {
+  color: var(--color-accent-rose);
+  border-color: rgba(244, 63, 94, 0.2);
+  background: rgba(244, 63, 94, 0.06);
+}

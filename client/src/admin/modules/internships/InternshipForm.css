@@ -1,0 +1,322 @@
+/* ============================================
+   GRAXION ADMIN — Internship Form
+   ============================================ */
+
+.internship-form-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 800px;
+}
+
+.if-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: var(--color-text-muted);
+  gap: 12px;
+}
+
+/* ── Header ── */
+.if-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.if-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  background: var(--color-bg-glass);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font-size: var(--text-small);
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+  margin-top: 4px;
+}
+
+.if-back-btn:hover {
+  border-color: var(--color-accent-cyan);
+  color: var(--color-accent-cyan);
+}
+
+.if-header h1 {
+  font-size: var(--text-h3);
+  font-weight: var(--fw-bold);
+  margin-bottom: 4px;
+}
+
+.if-header p {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ── Step Indicator ── */
+.if-steps {
+  display: flex;
+  gap: 8px;
+}
+
+.if-step {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--color-bg-glass);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.if-step:hover {
+  border-color: var(--color-border-hover);
+}
+
+.if-step.active {
+  border-color: var(--color-accent-cyan);
+  background: rgba(0, 212, 255, 0.04);
+  color: var(--color-text-primary);
+}
+
+.if-step.completed {
+  border-color: var(--color-accent-emerald);
+  color: var(--color-text-primary);
+}
+
+.if-step-num {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  font-size: var(--text-small);
+  font-weight: var(--fw-semibold);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+}
+
+.if-step.active .if-step-num {
+  background: var(--color-accent-cyan);
+  color: var(--color-bg-primary);
+  border-color: var(--color-accent-cyan);
+}
+
+.if-step.completed .if-step-num {
+  background: var(--color-accent-emerald);
+  color: #fff;
+  border-color: var(--color-accent-emerald);
+}
+
+.if-step-label {
+  font-size: var(--text-small);
+  font-weight: var(--fw-medium);
+}
+
+/* ── Error Banner ── */
+.if-error-banner {
+  padding: 12px 16px;
+  background: rgba(244, 63, 94, 0.08);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  border-radius: var(--radius-md);
+  color: var(--color-accent-rose);
+  font-size: var(--text-body-sm);
+}
+
+/* ── Form Card ── */
+.if-form-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+}
+
+.if-step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeIn 0.3s var(--ease-out);
+}
+
+.if-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+/* ── Form Actions ── */
+.if-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.if-form-actions-right {
+  margin-left: auto;
+}
+
+.if-form-actions .admin-btn-primary,
+.if-form-actions .admin-btn-secondary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+/* ── Assessments Step ── */
+.assessments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.no-assessments {
+  text-align: center;
+  padding: 40px;
+  color: var(--color-text-muted);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.assessments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.assessment-week {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.week-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.week-name-input {
+  background: none;
+  border: none;
+  font-size: var(--text-body);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  outline: none;
+}
+
+.modules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.module-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.mod-input-lg, .mod-input-sm {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  color: var(--color-text-primary);
+  font-size: var(--text-small);
+  outline: none;
+}
+
+.mod-input-lg {
+  flex: 2;
+}
+
+.mod-input-sm {
+  width: 80px;
+  text-align: center;
+}
+
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.icon-btn.danger:hover {
+  color: var(--color-accent-rose);
+  border-color: var(--color-accent-rose);
+  background: rgba(244, 63, 94, 0.08);
+}
+
+.add-module-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  background: none;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-size: var(--text-small);
+  cursor: pointer;
+  margin-top: 4px;
+}
+.add-module-btn:hover {
+  border-color: var(--color-accent-cyan);
+  color: var(--color-accent-cyan);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .if-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .if-steps {
+    flex-direction: column;
+  }
+
+  .if-form-card {
+    padding: 20px 16px;
+  }
+  
+  .module-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .mod-input-lg, .mod-input-sm {
+    width: 100%;
+  }
+}
+

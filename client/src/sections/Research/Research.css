@@ -1,0 +1,114 @@
+.research {
+  padding: var(--section-padding);
+  background: var(--color-bg-primary);
+  position: relative;
+}
+
+.research-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+.research-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.research-title {
+  font-size: var(--text-h2);
+  font-weight: var(--fw-extrabold);
+  color: var(--color-text-primary);
+  line-height: var(--leading-tight);
+}
+
+.research-desc {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+.research-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  margin-top: var(--space-4);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.research-stat-value {
+  font-size: var(--text-h2);
+  font-weight: var(--fw-bold);
+  color: var(--color-accent-emerald);
+  margin-bottom: var(--space-1);
+}
+
+.research-stat-label {
+  font-size: var(--text-small);
+  color: var(--color-text-secondary);
+}
+
+.research-visual {
+  position: relative;
+  height: 400px;
+  background: var(--color-bg-glass);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.research-visual::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(16, 185, 129, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.research-hex-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  gap: 10px;
+  transform: rotate(15deg);
+}
+
+.research-hex {
+  width: 80px;
+  height: 90px;
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent-emerald);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.research-hex:hover {
+  background: rgba(16, 185, 129, 0.2);
+  transform: scale(1.1);
+}
+
+.research-hex:nth-child(even) {
+  transform: translateY(45px);
+}
+.research-hex:nth-child(even):hover {
+  transform: translateY(45px) scale(1.1);
+}
+
+@media (max-width: 960px) {
+  .research-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+}

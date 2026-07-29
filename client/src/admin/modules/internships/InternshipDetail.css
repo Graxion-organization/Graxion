@@ -1,0 +1,196 @@
+/* ============================================
+   GRAXION ADMIN — Internship Detail
+   ============================================ */
+
+.internship-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.id-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: var(--color-text-muted);
+  gap: 12px;
+}
+
+/* ── Header ── */
+.id-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.id-header-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.id-header-info h1 {
+  font-size: var(--text-h3);
+  font-weight: var(--fw-bold);
+}
+
+.id-header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.id-header-actions .admin-btn-primary,
+.id-header-actions .admin-btn-secondary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+/* ── Grid ── */
+.id-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ── Card ── */
+.id-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+.id-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-body);
+  font-weight: var(--fw-semibold);
+  margin-bottom: 20px;
+}
+
+.id-card-title svg {
+  color: var(--color-accent-cyan);
+}
+
+/* ── Info List ── */
+.id-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.id-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.id-info-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.id-info-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.id-info-value {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-primary);
+}
+
+.id-info-value.mono {
+  font-family: monospace;
+}
+
+.id-info-value.cyan {
+  color: var(--color-accent-cyan);
+}
+
+.id-info-value.pre {
+  white-space: pre-wrap;
+  line-height: var(--leading-normal);
+  background: var(--color-bg-glass);
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  margin-top: 2px;
+}
+
+.domain-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background: rgba(124, 58, 237, 0.08);
+  border-radius: var(--radius-sm);
+  color: var(--color-accent-purple);
+  width: fit-content;
+}
+
+/* ── Stars ── */
+.id-stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.star-filled {
+  color: var(--color-accent-amber);
+}
+
+.star-empty {
+  color: var(--color-text-muted);
+}
+
+.id-rating-num {
+  margin-left: 8px;
+  font-size: var(--text-small);
+  font-weight: var(--fw-semibold);
+  color: var(--color-accent-amber);
+}
+
+/* ── Certificate Status ── */
+.id-cert-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-small);
+  font-weight: var(--fw-medium);
+}
+
+.id-cert-status.issued {
+  color: var(--color-accent-emerald);
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.id-cert-status.pending {
+  color: var(--color-accent-amber);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .id-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .id-header {
+    flex-direction: column;
+  }
+
+  .id-header-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

@@ -1,0 +1,214 @@
+.connection {
+  padding: var(--section-padding);
+  background: var(--color-bg-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.connection-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+.connection-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.connection-content .section-header {
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+  max-width: none;
+}
+
+.connection-title {
+  font-size: var(--text-h2);
+  font-weight: var(--fw-extrabold);
+  color: var(--color-text-primary);
+  line-height: var(--leading-tight);
+}
+
+.connection-desc {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+.connection-features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.connection-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--color-bg-glass);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.connection-feature:hover {
+  background: var(--color-bg-glass-hover);
+  border-color: var(--color-border-hover);
+  transform: translateX(4px);
+}
+
+.connection-feature-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(124, 58, 237, 0.08);
+  color: var(--color-accent-purple);
+  flex-shrink: 0;
+}
+
+.connection-feature-text h4 {
+  font-size: var(--text-body-sm);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+
+.connection-feature-text p {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  line-height: var(--leading-normal);
+}
+
+/* Diagram */
+.connection-diagram {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 450px;
+}
+
+.connection-diagram::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.connection-center {
+  width: 100px;
+  height: 100px;
+  background: var(--color-bg-glass);
+  border: 2px solid var(--color-accent-purple);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 40px rgba(124, 58, 237, 0.2);
+}
+
+.connection-center-text {
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+}
+
+.connection-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  animation: spin 30s linear infinite;
+}
+
+.connection-orbit.inner {
+  width: 260px;
+  height: 260px;
+  animation-duration: 20s;
+}
+
+.connection-orbit.outer {
+  width: 420px;
+  height: 420px;
+  animation-duration: 35s;
+  animation-direction: reverse;
+}
+
+.connection-node {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  top: -24px;
+  left: calc(50% - 24px);
+  /* Reverse the parent's rotation to keep nodes upright */
+  animation: reverse-spin 30s linear infinite;
+}
+
+.connection-orbit.inner .connection-node {
+  animation-duration: 20s;
+}
+
+.connection-orbit.outer .connection-node {
+  animation-duration: 35s;
+  animation-direction: reverse;
+}
+
+.connection-node:nth-child(2) {
+  top: calc(50% - 24px);
+  left: -24px;
+}
+
+.connection-node:nth-child(3) {
+  top: auto;
+  bottom: -24px;
+  left: calc(50% - 24px);
+}
+
+.connection-node:nth-child(4) {
+  top: calc(50% - 24px);
+  left: auto;
+  right: -24px;
+}
+
+@keyframes spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes reverse-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@media (max-width: 960px) {
+  .connection-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+  .connection-diagram {
+    order: -1;
+  }
+}

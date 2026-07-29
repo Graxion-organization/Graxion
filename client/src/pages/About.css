@@ -1,0 +1,275 @@
+.about-page {
+  padding-top: var(--space-32);
+}
+
+/* About Hero */
+.about-hero {
+  padding: var(--space-20) 0 var(--space-16);
+  text-align: center;
+  position: relative;
+}
+
+.about-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(0, 212, 255, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.about-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  margin-bottom: var(--space-8);
+  font-size: var(--text-caption);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-accent-cyan);
+  background: rgba(0, 212, 255, 0.06);
+  border: 1px solid rgba(0, 212, 255, 0.12);
+  border-radius: var(--radius-full);
+}
+
+.about-hero-title {
+  font-size: var(--text-h1);
+  font-weight: var(--fw-black);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-6);
+  letter-spacing: var(--tracking-tight);
+}
+
+.about-hero-subtitle {
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* Letter from founder */
+.about-letter {
+  padding: var(--section-padding);
+  background: var(--color-bg-secondary);
+}
+
+.about-letter-content {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.about-letter-title {
+  font-size: var(--text-h2);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.about-letter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-overline);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-accent-purple);
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px solid rgba(124, 58, 237, 0.15);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-10);
+}
+
+.about-letter-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.about-letter-body p {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+.about-letter-body p:first-child::first-letter {
+  font-size: 3em;
+  font-weight: var(--fw-bold);
+  color: var(--color-accent-cyan);
+  float: left;
+  line-height: 0.8;
+  margin-right: 0.1em;
+  margin-top: 0.05em;
+}
+
+.about-letter-signature {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-body-sm);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* Mission/Vision/Purpose grid */
+.about-mvp {
+  padding: var(--section-padding);
+  background: var(--color-bg-primary);
+}
+
+.about-mvp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.about-mvp-card {
+  padding: var(--space-10);
+  background: var(--color-bg-glass);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  transition: all var(--duration-normal) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-mvp-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--color-gradient-primary);
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+.about-mvp-card:hover {
+  background: var(--color-bg-glass-hover);
+  border-color: var(--color-border-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.about-mvp-card:hover::before {
+  opacity: 1;
+}
+
+.about-mvp-label {
+  font-size: var(--text-overline);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-accent-cyan);
+}
+
+.about-mvp-title {
+  font-size: var(--text-h3);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  line-height: var(--leading-snug);
+}
+
+.about-mvp-desc {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+/* Values grid */
+.about-values {
+  padding: var(--section-padding);
+  background: var(--color-bg-secondary);
+}
+
+.about-values-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-value-chip {
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--text-body-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-primary);
+  background: var(--color-bg-glass);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  transition: all var(--duration-normal) var(--ease-out);
+  cursor: default;
+}
+
+.about-value-chip:hover {
+  border-color: var(--color-accent-cyan);
+  color: var(--color-accent-cyan);
+  background: rgba(0, 212, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Timeline / story */
+.about-belief {
+  padding: var(--section-padding);
+  background: var(--color-bg-primary);
+  text-align: center;
+}
+
+.about-belief-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.about-belief-quote {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-6);
+}
+
+.about-belief-quote em {
+  font-style: normal;
+  background: var(--color-gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-belief-sub {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+@media (max-width: 860px) {
+  .about-mvp-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-page {
+    padding-top: var(--space-24);
+  }
+}

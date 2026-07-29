@@ -1,0 +1,101 @@
+.trust {
+  padding: var(--section-padding);
+  background: var(--color-bg-primary);
+  position: relative;
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.trust-card {
+  padding: var(--space-10);
+  background: var(--color-bg-glass);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.trust-card:hover {
+  background: var(--color-bg-glass-hover);
+  border-color: var(--color-border-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.trust-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(16, 185, 129, 0.06);
+  color: var(--color-accent-emerald);
+}
+
+.trust-card-title {
+  font-size: var(--text-h4);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+}
+
+.trust-card-desc {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+/* Promise cards */
+.trust-promise {
+  margin-top: var(--space-16);
+  padding: var(--space-12);
+  background: var(--color-gradient-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  text-align: center;
+}
+
+.trust-promise-title {
+  font-size: var(--text-h3);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-8);
+}
+
+.trust-promise-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.trust-promise-tag {
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--text-small);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-primary);
+  background: var(--color-bg-glass);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.trust-promise-tag:hover {
+  border-color: var(--color-accent-cyan);
+  color: var(--color-accent-cyan);
+  background: rgba(0, 212, 255, 0.05);
+}
+
+@media (max-width: 860px) {
+  .trust-grid {
+    grid-template-columns: 1fr;
+  }
+}

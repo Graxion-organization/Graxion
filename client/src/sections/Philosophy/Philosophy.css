@@ -1,0 +1,61 @@
+.philosophy {
+  padding: clamp(5rem, 12vh, 10rem) 0;
+  background: var(--color-bg-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+.philosophy::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.philosophy-quotes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.philosophy-quote {
+  text-align: center;
+  position: relative;
+}
+
+.philosophy-quote-text {
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  font-weight: var(--fw-bold);
+  line-height: var(--leading-snug);
+  color: var(--color-text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.philosophy-quote-text em {
+  font-style: normal;
+  background: var(--color-gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.philosophy-divider {
+  width: 40px;
+  height: 2px;
+  background: var(--color-gradient-primary);
+  margin: 0 auto;
+  border-radius: var(--radius-full);
+}
+
+@media (max-width: 640px) {
+  .philosophy-quotes {
+    gap: var(--space-12);
+  }
+}

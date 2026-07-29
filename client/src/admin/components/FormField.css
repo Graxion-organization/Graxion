@@ -1,0 +1,102 @@
+/* ============================================
+   GRAXION ADMIN — Form Field Styles
+   ============================================ */
+
+.admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-field-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-small);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-secondary);
+}
+
+.admin-field-required {
+  color: var(--color-accent-rose);
+}
+
+.admin-field-input,
+.admin-field select,
+.admin-field textarea {
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: var(--text-body-sm);
+  font-family: var(--font-family);
+  transition: border-color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
+  outline: none;
+}
+
+.admin-field-input:focus,
+.admin-field select:focus,
+.admin-field textarea:focus {
+  border-color: var(--color-accent-cyan);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.08);
+}
+
+.admin-field-input::placeholder,
+.admin-field textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.admin-field-input.has-error,
+.admin-field.error .admin-field-input,
+.admin-field.error select,
+.admin-field.error textarea {
+  border-color: var(--color-accent-rose);
+}
+
+.admin-field-input.has-error:focus,
+.admin-field.error .admin-field-input:focus,
+.admin-field.error select:focus,
+.admin-field.error textarea:focus {
+  box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.08);
+}
+
+.admin-field-input:disabled,
+.admin-field select:disabled,
+.admin-field textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Select dropdown */
+.admin-field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239494b0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+.admin-field select option {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+
+/* Textarea */
+.admin-field textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Error & Hint */
+.admin-field-error {
+  font-size: var(--text-caption);
+  color: var(--color-accent-rose);
+}
+
+.admin-field-hint {
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+}

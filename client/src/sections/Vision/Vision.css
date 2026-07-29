@@ -1,0 +1,85 @@
+.vision {
+  padding: clamp(6rem, 14vh, 12rem) 0;
+  background: var(--color-bg-secondary);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.vision::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(0, 212, 255, 0.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.vision-content {
+  position: relative;
+  z-index: 1;
+  max-width: 850px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-10);
+}
+
+.vision-overline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.vision-overline::before,
+.vision-overline::after {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--color-accent-cyan);
+  opacity: 0.4;
+}
+
+.vision-overline span {
+  font-size: var(--text-overline);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-accent-cyan);
+}
+
+.vision-text {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-primary);
+  line-height: var(--leading-relaxed);
+}
+
+.vision-text em {
+  font-style: normal;
+  color: var(--color-accent-cyan);
+}
+
+.vision-divider {
+  width: 60px;
+  height: 2px;
+  background: var(--color-gradient-primary);
+  border-radius: var(--radius-full);
+}
+
+.vision-dream {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 700px;
+}
+
+.vision-signature {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-wide);
+}
