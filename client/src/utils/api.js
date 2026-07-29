@@ -3,7 +3,7 @@
  * Centralized API calls with JWT token management
  */
 
-const API_BASE = '/api';
+const API_BASE = import.meta.env.VITE_API_URL || '/api';
 
 /**
  * Get stored auth token
