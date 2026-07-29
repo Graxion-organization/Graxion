@@ -147,4 +147,10 @@ export const verifyAPI = {
       method: 'POST',
       body: { studentId },
     }),
+
+  byEmail: (email) =>
+    request('/verify/by-email', {
+      method: 'POST',
+      body: { email },
+    }),
 };

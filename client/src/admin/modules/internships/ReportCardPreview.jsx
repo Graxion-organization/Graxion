@@ -114,6 +114,12 @@ export default function ReportCardPreview({ data }) {
 
       <div className="rc-container" ref={reportRef}>
         
+        {/* Watermark */}
+        <div className="rc-watermark">
+          <img src="/logo.png" alt="" className="rc-watermark-logo" onError={(e) => { e.target.style.display='none' }} />
+          <div className="rc-watermark-text">GRAXION</div>
+        </div>
+
         {/* Header */}
         <div className="rc-header">
           <img src="/logo.png" alt="Graxion Logo" className="rc-logo" onError={(e) => { e.target.style.display='none' }} />
@@ -159,9 +165,11 @@ export default function ReportCardPreview({ data }) {
                 <td>{issueDate}</td>
               </tr>
               <tr>
+                <th>Mentor</th>
+                <td>{data.mentor || 'Graxion Team'}</td>
                 <th>Status</th>
-                <td colSpan="3" style={{ color: '#10b981', fontWeight: 'bold' }}>
-                  {data.status.toUpperCase()}
+                <td style={{ color: '#10b981', fontWeight: 'bold' }}>
+                  {data.status ? data.status.toUpperCase() : 'COMPLETED'}
                 </td>
               </tr>
             </tbody>

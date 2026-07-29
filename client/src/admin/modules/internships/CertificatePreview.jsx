@@ -101,6 +101,12 @@ export default function CertificatePreview({ data }) {
         <div className="cert-corner cert-corner-bl" />
         <div className="cert-corner cert-corner-br" />
 
+        {/* Watermark */}
+        <div className="cert-watermark">
+          <img src="/logo.png" alt="" className="cert-watermark-logo" onError={(e) => { e.target.style.display='none' }} />
+          <div className="cert-watermark-text">GRAXION</div>
+        </div>
+
         {/* Gradient borders */}
         <div className="cert-border-top" />
         <div className="cert-border-bottom" />

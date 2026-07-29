@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { QRCodeSVG } from 'qrcode.react';
 import { verifyAPI } from '../utils/api';
+import CertificatePreview from '../admin/modules/internships/CertificatePreview';
+import ReportCardPreview from '../admin/modules/internships/ReportCardPreview';
 import {
   Shield,
   CheckCircle,
@@ -15,17 +17,22 @@ import {
   Star,
   Loader,
   IdCard,
+  Mail,
+  FileText,
+  X
 } from 'lucide-react';
 import './Verify.css';
 
 export default function Verify() {
   const { certificateId: paramCertId } = useParams();
   const [searchId, setSearchId] = useState('');
-  const [searchType, setSearchType] = useState('certificate'); // 'certificate' or 'student'
+  const [searchType, setSearchType] = useState('certificate'); // 'certificate', 'student', 'email'
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [searched, setSearched] = useState(false);
+  
+  const [viewingDoc, setViewingDoc] = useState(null); // { type: 'certificate' | 'report', data: object }
 
   // Auto-verify if certificate ID is in URL
   useEffect(() => {
@@ -42,6 +49,7 @@ export default function Verify() {
     setError('');
     setResult(null);
     setSearched(true);
+    setViewingDoc(null);
 
     try {
       let response;
@@ -52,8 +60,15 @@ export default function Verify() {
           data: response.data,
           multiple: false,
         });
-      } else {
+      } else if (type === 'student') {
         response = await verifyAPI.byStudentId(id.trim());
+        setResult({
+          verified: true,
+          data: response.data,
+          multiple: Array.isArray(response.data),
+        });
+      } else if (type === 'email') {
+        response = await verifyAPI.byEmail(id.trim());
         setResult({
           verified: true,
           data: response.data,
@@ -124,17 +139,26 @@ export default function Verify() {
                 <IdCard size={16} />
                 Student ID
               </button>
+              <button
+                className={`verify-tab ${searchType === 'email' ? 'active' : ''}`}
+                onClick={() => setSearchType('email')}
+              >
+                <Mail size={16} />
+                Email Address
+              </button>
             </div>
 
             <form onSubmit={handleSubmit} className="verify-search-form">
               <div className="verify-input-wrap">
                 <Search size={18} />
                 <input
-                  type="text"
+                  type={searchType === 'email' ? 'email' : 'text'}
                   placeholder={
                     searchType === 'certificate'
-                      ? 'Enter Certificate ID (e.g., GRX-INT-2026-A7F3B2)'
-                      : 'Enter Student ID (e.g., GRX-STD-B2C1A7)'
+                      ? 'Enter Certificate ID (e.g., GRX-INT...)'
+                      : searchType === 'student'
+                      ? 'Enter Student ID (e.g., GRX-STD...)'
+                      : 'Enter registered Email Address'
                   }
                   value={searchId}
                   onChange={(e) => setSearchId(e.target.value)}
@@ -161,10 +185,10 @@ export default function Verify() {
               <div className="verify-result-icon invalid">
                 <XCircle size={48} />
               </div>
-              <h2>Certificate Not Found</h2>
+              <h2>Records Not Found</h2>
               <p>
-                The provided ID does not match any verified certificate in our records.
-                Please double-check the ID and try again.
+                The provided details do not match any verified certificate in our records.
+                Please double-check and try again.
               </p>
             </div>
           )}
@@ -262,38 +286,30 @@ export default function Verify() {
                         new Date(certData.certificateIssuedDate).toLocaleDateString()}
                     </span>
                   </div>
-                  <div className="verify-detail">
-                    <span className="verify-detail-label">Issued By</span>
-                    <span className="verify-detail-value">
-                      {certData.issuedBy || 'Graxion Technologies'}
-                    </span>
-                  </div>
                 </div>
-
-                {/* Share QR */}
-                <div className="verify-share">
-                  <div className="verify-qr">
-                    <QRCodeSVG
-                      value={window.location.href}
-                      size={80}
-                      bgColor="transparent"
-                      fgColor="#00d4ff"
-                      level="M"
-                    />
-                  </div>
-                  <p className="verify-share-text">Share this verification</p>
+                
+                <div className="verify-doc-actions">
+                  <button className="verify-btn-doc" onClick={() => setViewingDoc({ type: 'certificate', data: certData })}>
+                    <Award size={18} /> View Certificate
+                  </button>
+                  <button className="verify-btn-doc" onClick={() => setViewingDoc({ type: 'report', data: certData })}>
+                    <FileText size={18} /> View Report Card
+                  </button>
                 </div>
               </div>
             </div>
           )}
 
-          {/* Result: VERIFIED - Multiple (Student ID) */}
+          {/* Result: VERIFIED - Multiple */}
           {result?.verified && certList && (
             <div className="verify-result verify-valid">
               <div className="verify-result-icon valid">
                 <CheckCircle size={48} />
               </div>
-              <h2>{certList.length} Certificate(s) Found</h2>
+              <h2>{certList.length} Record(s) Found ✓</h2>
+              <p className="verify-valid-msg">
+                These records have been verified as authentic and were issued by Graxion Technologies.
+              </p>
 
               <div className="verify-multi-list">
                 {certList.map((cert, i) => (
@@ -311,6 +327,14 @@ export default function Verify() {
                         {cert.endDate && new Date(cert.endDate).toLocaleDateString()}
                       </span>
                     </div>
+                    <div className="verify-doc-actions" style={{ marginTop: '1rem' }}>
+                      <button className="verify-btn-doc" onClick={() => setViewingDoc({ type: 'certificate', data: cert })}>
+                        <Award size={16} /> View Certificate
+                      </button>
+                      <button className="verify-btn-doc" onClick={() => setViewingDoc({ type: 'report', data: cert })}>
+                        <FileText size={16} /> View Report Card
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -323,6 +347,24 @@ export default function Verify() {
           </div>
         </div>
       </div>
+
+      {/* Document Viewer Modal */}
+      {viewingDoc && (
+        <div className="verify-doc-modal">
+          <div className="verify-doc-modal-content">
+            <button className="verify-doc-close" onClick={() => setViewingDoc(null)}>
+              <X size={24} />
+            </button>
+            <div className="verify-doc-scrollable">
+              {viewingDoc.type === 'certificate' ? (
+                <CertificatePreview data={viewingDoc.data} />
+              ) : (
+                <ReportCardPreview data={viewingDoc.data} />
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
