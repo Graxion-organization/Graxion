@@ -154,3 +154,26 @@ export const verifyAPI = {
       body: { email },
     }),
 };
+
+// Student API
+export const studentAPI = {
+  sendOtp: (email) =>
+    request('/student/send-otp', {
+      method: 'POST',
+      body: { email },
+    }),
+
+  verifyOtp: (email, otp) =>
+    request('/student/verify-otp', {
+      method: 'POST',
+      body: { email, otp },
+    }),
+
+  getDashboard: (token) =>
+    request('/student/dashboard', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }),
+};

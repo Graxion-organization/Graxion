@@ -9,6 +9,8 @@ import ContactPage from "./pages/ContactPage";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Verify from "./pages/Verify";
+import StudentLogin from "./pages/StudentPortal/StudentLogin";
+import StudentDashboard from "./pages/StudentPortal/StudentDashboard";
 import { AuthProvider } from "./admin/AdminAuthContext";
 import AdminLogin from "./admin/AdminLogin";
 import AdminLayout from "./admin/AdminLayout";
@@ -41,6 +43,8 @@ export default function App() {
                   <Route path="/terms" element={<Terms />} />
                   <Route path="/internship/verify" element={<Verify />} />
                   <Route path="/internship/verify/:certificateId" element={<Verify />} />
+                  <Route path="/student/login" element={<StudentLogin />} />
+                  <Route path="/student/dashboard" element={<StudentDashboard />} />
                 </Routes>
               </main>
               <Footer />

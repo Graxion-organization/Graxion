@@ -396,3 +396,18 @@
   }
 }
 
+/* Responsiveness for viewing on small screens */
+@media screen and (max-width: 850px) {
+  .rc-container {
+    transform: scale(calc(100vw / 850));
+    transform-origin: top center;
+    margin-bottom: calc(-297mm * (1 - (100vw / 850)));
+  }
+}
+@media screen and (max-width: 500px) {
+  .rc-container {
+    transform: scale(calc(100vw / 820));
+    transform-origin: top left;
+  }
+}
+

@@ -26,7 +26,7 @@ import './Verify.css';
 export default function Verify() {
   const { certificateId: paramCertId } = useParams();
   const [searchId, setSearchId] = useState('');
-  const [searchType, setSearchType] = useState('certificate'); // 'certificate', 'student', 'email'
+  const [searchType, setSearchType] = useState('certificate'); // 'certificate', 'student'
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -62,13 +62,6 @@ export default function Verify() {
         });
       } else if (type === 'student') {
         response = await verifyAPI.byStudentId(id.trim());
-        setResult({
-          verified: true,
-          data: response.data,
-          multiple: Array.isArray(response.data),
-        });
-      } else if (type === 'email') {
-        response = await verifyAPI.byEmail(id.trim());
         setResult({
           verified: true,
           data: response.data,
@@ -139,26 +132,17 @@ export default function Verify() {
                 <IdCard size={16} />
                 Student ID
               </button>
-              <button
-                className={`verify-tab ${searchType === 'email' ? 'active' : ''}`}
-                onClick={() => setSearchType('email')}
-              >
-                <Mail size={16} />
-                Email Address
-              </button>
             </div>
 
             <form onSubmit={handleSubmit} className="verify-search-form">
               <div className="verify-input-wrap">
                 <Search size={18} />
                 <input
-                  type={searchType === 'email' ? 'email' : 'text'}
+                  type="text"
                   placeholder={
                     searchType === 'certificate'
                       ? 'Enter Certificate ID (e.g., GRX-INT...)'
-                      : searchType === 'student'
-                      ? 'Enter Student ID (e.g., GRX-STD...)'
-                      : 'Enter registered Email Address'
+                      : 'Enter Student ID (e.g., GRX-STD...)'
                   }
                   value={searchId}
                   onChange={(e) => setSearchId(e.target.value)}

@@ -7,6 +7,7 @@ import connectDB from './config/db.js';
 import adminRoutes from './routes/admin.js';
 import internshipRoutes from './routes/internships.js';
 import verifyRoutes from './routes/verify.js';
+import studentRoutes from './routes/student.js';
 
 // Load env vars from root directory
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -45,6 +46,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/admin', adminRoutes);
 app.use('/api/internships', internshipRoutes);
 app.use('/api/verify', verifyRoutes);
+app.use('/api/student', studentRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
