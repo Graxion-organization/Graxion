@@ -397,15 +397,16 @@
 /* Responsiveness for viewing on small screens */
 @media screen and (max-width: 850px) {
   .rc-container {
-    transform: scale(calc(100vw / 850));
+    transform: scale(calc((100vw - 64px) / 794)); /* 794px is roughly 210mm. 64px accounts for padding */
     transform-origin: top center;
-    margin-bottom: calc(-297mm * (1 - (100vw / 850)));
+    margin-bottom: calc(-297mm * (1 - ((100vw - 64px) / 794)));
   }
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 480px) {
   .rc-container {
-    transform: scale(calc(100vw / 820));
-    transform-origin: top left;
+    transform: scale(calc((100vw - 40px) / 794));
+    transform-origin: top center;
+    margin-bottom: calc(-297mm * (1 - ((100vw - 40px) / 794)));
   }
 }
 
