@@ -73,23 +73,32 @@
 @media (max-width: 600px) {
   .rdv-actions-wrapper {
     gap: 8px;
-    padding: 12px 8px;
+    padding: 10px 6px;
   }
   .rdv-actions-wrapper button {
-    padding: 8px 12px !important;
+    padding: 6px 12px !important;
     font-size: 12px !important;
+    gap: 6px !important;
+  }
+  .rdv-actions-wrapper button svg {
+    width: 14px !important;
+    height: 14px !important;
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 400px) {
   .rdv-actions-wrapper {
-    flex-direction: column;
     gap: 6px;
-    padding: 12px;
+    padding: 8px 4px;
   }
   .rdv-actions-wrapper button {
-    width: 100% !important;
-    justify-content: center !important;
+    padding: 5px 8px !important;
+    font-size: 11px !important;
+    gap: 4px !important;
+  }
+  .rdv-actions-wrapper button svg {
+    width: 12px !important;
+    height: 12px !important;
   }
 }
 
