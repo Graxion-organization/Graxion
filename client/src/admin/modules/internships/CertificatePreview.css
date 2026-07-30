@@ -23,14 +23,15 @@
 /* ── Certificate Container ── */
 .cert-container {
   position: relative;
-  width: 100%;
-  max-width: 800px;
-  min-height: 560px;
+  width: 800px; /* Fixed width for scaling */
+  height: 566px; /* Fixed landscape height (A4 proportion) */
+  flex-shrink: 0;
   background: #ffffff;
   border-radius: 12px;
   overflow: hidden;
   padding: 40px;
   color: #111827;
+  box-sizing: border-box;
 }
 
 /* Background pattern */
@@ -359,31 +360,7 @@
   }
 }
 
-/* ── Responsive ── */
-@media (max-width: 640px) {
-  .cert-container {
-    padding: 24px;
-  }
 
-  .cert-name {
-    font-size: 1.5rem;
-  }
-
-  .cert-title {
-    font-size: 1.2rem;
-  }
-
-  .cert-bottom {
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .cert-signature,
-  .cert-details {
-    text-align: center;
-  }
-}
 
 /* Watermark styles */
 .cert-watermark {

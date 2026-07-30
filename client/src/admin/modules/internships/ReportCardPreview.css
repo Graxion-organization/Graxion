@@ -28,11 +28,12 @@
   
   /* ── A4 Container ── */
   .rc-container {
-    width: 210mm; /* A4 width */
-    min-height: 297mm; /* A4 height */
+    width: 794px; /* A4 width */
+    min-height: 1123px; /* A4 height */
+    flex-shrink: 0;
     background: #ffffff;
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    padding: 15mm 15mm;
+    padding: 56px 56px; /* 15mm approx */
     box-sizing: border-box;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     color: #1f2937;
@@ -399,14 +400,14 @@
   .rc-container {
     transform: scale(calc((100vw - 64px) / 794)); /* 794px is roughly 210mm. 64px accounts for padding */
     transform-origin: top center;
-    margin-bottom: calc(-297mm * (1 - ((100vw - 64px) / 794)));
+    margin-bottom: calc(-1123px * (1 - ((100vw - 64px) / 794)));
   }
 }
 @media screen and (max-width: 480px) {
   .rc-container {
     transform: scale(calc((100vw - 40px) / 794));
     transform-origin: top center;
-    margin-bottom: calc(-297mm * (1 - ((100vw - 40px) / 794)));
+    margin-bottom: calc(-1123px * (1 - ((100vw - 40px) / 794)));
   }
 }
 
