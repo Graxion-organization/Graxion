@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import html2canvas from 'html2canvas';
 import { QRCodeSVG } from 'qrcode.react';
 import { Download, Printer } from 'lucide-react';
+import ResponsiveDocumentViewer from './ResponsiveDocumentViewer';
 import './ReportCardPreview.css';
 
 export default function ReportCardPreview({ data }) {
@@ -100,18 +101,22 @@ export default function ReportCardPreview({ data }) {
     : new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 
   return (
-    <div className="rc-wrapper">
-      <div className="rc-actions">
-        <button className="admin-btn-secondary" onClick={handleDownload}>
-          <Download size={16} />
-          Download PNG
-        </button>
-        <button className="admin-btn-secondary" onClick={handlePrint}>
-          <Printer size={16} />
-          Print
-        </button>
-      </div>
-
+    <ResponsiveDocumentViewer 
+      documentWidth={794} 
+      documentHeight={1123}
+      actions={
+        <>
+          <button className="admin-btn-secondary" onClick={handleDownload}>
+            <Download size={16} />
+            Download PNG
+          </button>
+          <button className="admin-btn-secondary" onClick={handlePrint}>
+            <Printer size={16} />
+            Print
+          </button>
+        </>
+      }
+    >
       <div className="rc-container" ref={reportRef}>
         
         {/* Watermark */}
@@ -336,6 +341,6 @@ export default function ReportCardPreview({ data }) {
         </div>
 
       </div>
-    </div>
+    </ResponsiveDocumentViewer>
   );
 }

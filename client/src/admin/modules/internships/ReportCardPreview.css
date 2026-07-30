@@ -395,15 +395,5 @@
   }
 }
 
-/* Responsiveness for viewing on small screens */
-@media screen and (max-width: 850px) {
-  .rc-wrapper {
-    zoom: calc((100vw - 64px) / 794); /* 794px is A4 width. 64px accounts for padding */
-  }
-}
-@media screen and (max-width: 480px) {
-  .rc-wrapper {
-    zoom: calc((100vw - 40px) / 794);
-  }
-}
+
 

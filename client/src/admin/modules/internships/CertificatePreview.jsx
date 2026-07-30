@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import html2canvas from 'html2canvas';
 import { Download, Printer } from 'lucide-react';
+import ResponsiveDocumentViewer from './ResponsiveDocumentViewer';
 import './CertificatePreview.css';
 
 export default function CertificatePreview({ data }) {
@@ -81,18 +82,22 @@ export default function CertificatePreview({ data }) {
       });
 
   return (
-    <div className="cert-wrapper">
-      <div className="cert-actions">
-        <button className="admin-btn-secondary" onClick={handleDownload}>
-          <Download size={16} />
-          Download PNG
-        </button>
-        <button className="admin-btn-secondary" onClick={handlePrint}>
-          <Printer size={16} />
-          Print
-        </button>
-      </div>
-
+    <ResponsiveDocumentViewer 
+      documentWidth={800} 
+      documentHeight={566}
+      actions={
+        <>
+          <button className="admin-btn-secondary" onClick={handleDownload}>
+            <Download size={16} />
+            Download PNG
+          </button>
+          <button className="admin-btn-secondary" onClick={handlePrint}>
+            <Printer size={16} />
+            Print
+          </button>
+        </>
+      }
+    >
       <div className="cert-container" ref={certRef}>
         {/* Background decorations */}
         <div className="cert-bg-pattern" />
@@ -204,6 +209,6 @@ export default function CertificatePreview({ data }) {
           </div>
         </div>
       </div>
-    </div>
+    </ResponsiveDocumentViewer>
   );
 }

@@ -399,15 +399,5 @@
   }
 }
 
-/* Responsiveness for viewing on small screens */
-@media screen and (max-width: 850px) {
-  .cert-wrapper {
-    zoom: calc((100vw - 64px) / 800);
-  }
-}
-@media screen and (max-width: 480px) {
-  .cert-wrapper {
-    zoom: calc((100vw - 40px) / 800);
-  }
-}
+
 
