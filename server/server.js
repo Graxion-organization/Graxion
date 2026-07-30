@@ -47,13 +47,15 @@ app.use('/api/flow', protect, createProxyMiddleware({
   pathRewrite: {
     '^/api/flow': '/api', // Rewrite /api/flow to /api for the target server
   },
-  onProxyReq: (proxyReq, req, res) => {
-    // Inject Graxion proxy secret to bypass Flow backend JWT check
-    if (process.env.GRAXION_PROXY_SECRET) {
-      proxyReq.setHeader('x-graxion-proxy-secret', process.env.GRAXION_PROXY_SECRET);
+  on: {
+    proxyReq: (proxyReq, req, res) => {
+      // Inject Graxion proxy secret to bypass Flow backend JWT check
+      if (process.env.GRAXION_PROXY_SECRET) {
+        proxyReq.setHeader('x-graxion-proxy-secret', process.env.GRAXION_PROXY_SECRET);
+      }
+      // Remove the Graxion Authorization header so Flow backend doesn't try to parse it
+      proxyReq.removeHeader('Authorization');
     }
-    // Remove the Graxion Authorization header so Flow backend doesn't try to parse it
-    proxyReq.removeHeader('Authorization');
   }
 }));
 
