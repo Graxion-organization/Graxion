@@ -160,39 +160,39 @@ export default function CertificatePreview({ data, onClose }) {
               </div>
             </div>
           )}
+        </div>
 
-          <div className="cert-bottom">
-            <div className="cert-signature">
-              <p className="cert-sig-name">Issued by</p>
-              <p className="cert-sig-title">Graxion</p>
-            </div>
+        <div className="cert-bottom">
+          <div className="cert-signature">
+            <p className="cert-sig-name">Issued by</p>
+            <p className="cert-sig-title">Graxion</p>
+          </div>
 
-            {/* Seal */}
-            <div className="cert-seal">
-              <div className="cert-seal-inner">
-                <span className="cert-seal-text">VERIFIED</span>
-                <span className="cert-seal-icon">G</span>
-              </div>
+          {/* Seal */}
+          <div className="cert-seal">
+            <div className="cert-seal-inner">
+              <span className="cert-seal-text">VERIFIED</span>
+              <span className="cert-seal-icon">G</span>
             </div>
+          </div>
 
-            <div className="cert-qr-section">
-              <div className="cert-qr-box">
-                <QRCodeSVG
-                  value={verifyUrl}
-                  size={90}
-                  bgColor="transparent"
-                  fgColor="#00d4ff"
-                  level="H"
-                />
-              </div>
-              <p className="cert-qr-label">Scan to Verify</p>
+          <div className="cert-qr-section">
+            <div className="cert-qr-box">
+              <QRCodeSVG
+                value={verifyUrl}
+                size={90}
+                bgColor="transparent"
+                fgColor="#00d4ff"
+                level="H"
+              />
             </div>
+            <p className="cert-qr-label">Scan to Verify</p>
+          </div>
 
-            <div className="cert-details">
-              <p><strong>Certificate ID:</strong> {data.certificateId}</p>
-              <p><strong>Student ID:</strong> {data.studentId}</p>
-              <p><strong>Issue Date:</strong> {issuedDate}</p>
-            </div>
+          <div className="cert-details">
+            <p><strong>Certificate ID:</strong> {data.certificateId}</p>
+            <p><strong>Student ID:</strong> {data.studentId}</p>
+            <p><strong>Issue Date:</strong> {issuedDate}</p>
           </div>
         </div>
       </div>
