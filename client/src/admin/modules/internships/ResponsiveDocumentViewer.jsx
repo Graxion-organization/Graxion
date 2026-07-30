@@ -4,42 +4,51 @@ import './ResponsiveDocumentViewer.css';
 /**
  * A responsive wrapper that perfectly scales a fixed-dimension A4/Landscape document
  * using React and CSS transform without breaking layout or print/export.
- * Fully styled in Vanilla CSS to ensure compatibility outside Tailwind layouts.
+ * Dynamically measures the unscaled content height to support multi-page or variable height layouts.
  */
 export default function ResponsiveDocumentViewer({ 
   children, 
   documentWidth, 
-  documentHeight,
+  documentHeight = 566, // fallback default
   actions
 }) {
   const [scale, setScale] = useState(1);
+  const [measuredHeight, setMeasuredHeight] = useState(documentHeight);
   const containerRef = useRef(null);
+  const innerRef = useRef(null);
 
   useEffect(() => {
     const updateScale = () => {
-      if (!containerRef.current) return;
+      if (!containerRef.current || !innerRef.current) return;
       
-      // Calculate available width inside the modal scroll area.
-      // Subtract 16px to ensure a small safe margin on mobile screens.
       const availableWidth = containerRef.current.clientWidth - 16;
       
+      let newScale = 1;
       if (availableWidth < documentWidth) {
-        setScale(availableWidth / documentWidth);
-      } else {
-        setScale(1);
+        newScale = availableWidth / documentWidth;
+      }
+      setScale(newScale);
+      
+      // Measure actual unscaled content height dynamically.
+      // This ensures multi-page reports or weekly assessment tables are never cut off.
+      const actualHeight = innerRef.current.scrollHeight;
+      if (actualHeight > 0) {
+        setMeasuredHeight(actualHeight);
       }
     };
 
-    // Run initially and set a small timeout to handle rendering lag inside modals
     updateScale();
-    const timer = setTimeout(updateScale, 100);
+    // Extra timeouts to ensure styles and fonts are fully loaded before measuring height
+    const timer1 = setTimeout(updateScale, 100);
+    const timer2 = setTimeout(updateScale, 500);
 
     window.addEventListener('resize', updateScale);
     return () => {
-      clearTimeout(timer);
+      clearTimeout(timer1);
+      clearTimeout(timer2);
       window.removeEventListener('resize', updateScale);
     };
-  }, [documentWidth]);
+  }, [documentWidth, children]);
 
   return (
     <div className="rdv-viewer-container">
@@ -57,16 +66,17 @@ export default function ResponsiveDocumentViewer({
           className="rdv-bounding-box"
           style={{ 
             width: scale === 1 ? documentWidth : documentWidth * scale, 
-            height: scale === 1 ? documentHeight : documentHeight * scale 
+            height: scale === 1 ? measuredHeight : measuredHeight * scale 
           }}
         >
           {/* Scaled Inner Element */}
           <div 
+            ref={innerRef}
             className="rdv-scaled-inner"
             style={{ 
               transform: scale === 1 ? 'none' : `scale(${scale})`,
               width: documentWidth,
-              height: documentHeight
+              height: measuredHeight
             }}
           >
             {children}
