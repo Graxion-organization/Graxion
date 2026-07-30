@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import './ResponsiveDocumentViewer.css';
 
 /**
  * A responsive wrapper that perfectly scales a fixed-dimension A4/Landscape document
  * using React and CSS transform without breaking layout or print/export.
+ * Fully styled in Vanilla CSS to ensure compatibility outside Tailwind layouts.
  */
 export default function ResponsiveDocumentViewer({ 
   children, 
@@ -17,6 +19,8 @@ export default function ResponsiveDocumentViewer({
     const updateScale = () => {
       if (!containerRef.current) return;
       
+      // Calculate available width inside the modal scroll area.
+      // Subtract 16px to ensure a small safe margin on mobile screens.
       const availableWidth = containerRef.current.clientWidth - 16;
       
       if (availableWidth < documentWidth) {
@@ -26,28 +30,31 @@ export default function ResponsiveDocumentViewer({
       }
     };
 
+    // Run initially and set a small timeout to handle rendering lag inside modals
     updateScale();
+    const timer = setTimeout(updateScale, 100);
+
     window.addEventListener('resize', updateScale);
-    return () => window.removeEventListener('resize', updateScale);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', updateScale);
+    };
   }, [documentWidth]);
 
   return (
-    <div className="flex flex-col items-center w-full">
+    <div className="rdv-viewer-container">
       {/* Sticky Actions */}
       {actions && (
-        <div className="sticky top-0 z-50 flex gap-4 justify-center mb-6 w-full max-w-full bg-white/80 backdrop-blur p-4 rounded-b-xl border-b border-gray-200">
+        <div className="rdv-actions-wrapper">
           {actions}
         </div>
       )}
 
       {/* Responsive Scaling Container */}
-      <div 
-        ref={containerRef}
-        className="w-full flex justify-center print:block print:w-auto"
-      >
+      <div ref={containerRef} className="rdv-scale-container">
         {/* Bounding box to prevent overflow */}
         <div 
-          className="relative overflow-hidden print:overflow-visible transition-all duration-200 ease-out"
+          className="rdv-bounding-box"
           style={{ 
             width: scale === 1 ? documentWidth : documentWidth * scale, 
             height: scale === 1 ? documentHeight : documentHeight * scale 
@@ -55,7 +62,7 @@ export default function ResponsiveDocumentViewer({
         >
           {/* Scaled Inner Element */}
           <div 
-            className="origin-top-left absolute top-0 left-0 print:!transform-none"
+            className="rdv-scaled-inner"
             style={{ 
               transform: scale === 1 ? 'none' : `scale(${scale})`,
               width: documentWidth,

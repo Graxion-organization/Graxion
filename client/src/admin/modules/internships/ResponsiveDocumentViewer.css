@@ -1,0 +1,72 @@
+/* ==========================================================
+   GRAXION — Responsive Document Viewer Styles (Vanilla CSS)
+   ========================================================== */
+
+.rdv-viewer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.rdv-actions-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 24px;
+  width: 100%;
+  max-width: 100%;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.rdv-scale-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.rdv-bounding-box {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease-out;
+}
+
+.rdv-scaled-inner {
+  transform-origin: top left;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* ── Print Overrides ── */
+@media print {
+  .rdv-actions-wrapper {
+    display: none !important;
+  }
+  
+  .rdv-scale-container {
+    display: block !important;
+    width: auto !important;
+  }
+  
+  .rdv-bounding-box {
+    width: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  
+  .rdv-scaled-inner {
+    position: static !important;
+    transform: none !important;
+    width: auto !important;
+    height: auto !important;
+  }
+}
