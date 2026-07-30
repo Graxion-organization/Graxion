@@ -8,7 +8,7 @@ import './CertificatePreview.css';
 export default function CertificatePreview({ data, onClose }) {
   const certRef = useRef(null);
 
-  const verifyUrl = `${window.location.origin}/internship/verify/${data.certificateId}`;
+  const verifyUrl = `https://graxion.in/internship/verify/${data.certificateId}`;
 
   async function handleDownload() {
     if (!certRef.current) return;

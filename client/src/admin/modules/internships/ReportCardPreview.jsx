@@ -7,7 +7,7 @@ import './ReportCardPreview.css';
 
 export default function ReportCardPreview({ data, onClose }) {
   const reportRef = useRef(null);
-  const verifyUrl = `${window.location.origin}/internship/verify/${data.certificateId || data.studentId}`;
+  const verifyUrl = `https://graxion.in/internship/verify/${data.certificateId || data.studentId}`;
 
   async function handleDownload() {
     if (!reportRef.current) return;
