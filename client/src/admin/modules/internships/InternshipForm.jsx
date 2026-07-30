@@ -218,7 +218,7 @@ export default function InternshipForm() {
       } else {
         await internshipAPI.create(payload);
       }
-      navigate(`/${adminPath}/internships`);
+      navigate(`/${adminPath}/students/internships`);
     } catch (error) {
       console.error('Save failed:', error);
       setErrors({ submit: error.message || 'Failed to save' });
@@ -241,7 +241,7 @@ export default function InternshipForm() {
       <div className="if-header">
         <button
           className="if-back-btn"
-          onClick={() => navigate(`/${adminPath}/internships`)}
+          onClick={() => navigate(`/${adminPath}/students/internships`)}
         >
           <ChevronLeft size={18} />
           Back

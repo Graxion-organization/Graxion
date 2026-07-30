@@ -18,6 +18,8 @@ import InternshipDashboard from "./admin/modules/internships/InternshipDashboard
 import InternshipList from "./admin/modules/internships/InternshipList";
 import InternshipForm from "./admin/modules/internships/InternshipForm";
 import InternshipDetail from "./admin/modules/internships/InternshipDetail";
+import FlowAdminApp from "./admin/modules/flow/FlowAdminApp";
+import AdminProductSwitcher from "./admin/components/AdminProductSwitcher";
 import "./App.css";
 
 const ADMIN_PATH = import.meta.env.VITE_ADMIN_PATH || "gx-ctrl-a7f3b2c1";
@@ -59,14 +61,20 @@ export default function App() {
             <AuthProvider>
               <Routes>
                 <Route path="login" element={<AdminLogin />} />
-                <Route element={<AdminLayout />}>
-                  <Route path="dashboard" element={<InternshipDashboard />} />
-                  <Route path="internships" element={<InternshipList />} />
-                  <Route path="internships/new" element={<InternshipForm />} />
-                  <Route path="internships/:id" element={<InternshipDetail />} />
-                  <Route path="internships/:id/edit" element={<InternshipForm />} />
-                </Route>
+                <Route path="students/*" element={
+                  <Routes>
+                    <Route element={<AdminLayout />}>
+                      <Route path="dashboard" element={<InternshipDashboard />} />
+                      <Route path="internships" element={<InternshipList />} />
+                      <Route path="internships/new" element={<InternshipForm />} />
+                      <Route path="internships/:id" element={<InternshipDetail />} />
+                      <Route path="internships/:id/edit" element={<InternshipForm />} />
+                    </Route>
+                  </Routes>
+                } />
+                <Route path="flow/*" element={<FlowAdminApp />} />
               </Routes>
+              <AdminProductSwitcher />
             </AuthProvider>
           }
         />

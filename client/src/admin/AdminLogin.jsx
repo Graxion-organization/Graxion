@@ -22,7 +22,7 @@ export default function AdminLogin() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(`/${adminPath}/dashboard`);
+      navigate(`/${adminPath}/students/dashboard`);
     }
   }, [isAuthenticated, navigate, adminPath]);
 
@@ -53,7 +53,7 @@ export default function AdminLogin() {
       } else {
         await login(formData.email, formData.password);
       }
-      navigate(`/${adminPath}/dashboard`);
+      navigate(`/${adminPath}/students/dashboard`);
     } catch (err) {
       setError(err.message || 'Authentication failed');
     } finally {
@@ -221,7 +221,7 @@ export default function AdminLogin() {
         </div>
 
         <p className="admin-login-copyright">
-          © {new Date().getFullYear()} Graxion Technologies. All rights reserved.
+          © {new Date().getFullYear()} Graxion. All rights reserved.
         </p>
       </div>
     </div>

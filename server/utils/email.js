@@ -29,12 +29,12 @@ export const sendOtpEmail = async (email, otp) => {
     const transporter = createTransporter();
     
     const mailOptions = {
-      from: `"Graxion Technologies" <${process.env.SMTP_USER}>`,
+      from: `"Graxion" <${process.env.SMTP_USER}>`,
       to: email,
       subject: 'Your Graxion Student Portal Verification Code',
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 8px;">
-          <h2 style="color: #ea580c; text-align: center;">GRAXION TECHNOLOGIES</h2>
+          <h2 style="color: #ea580c; text-align: center;">GRAXION</h2>
           <p>Hello,</p>
           <p>You requested to log into the Student Portal. Please use the following One-Time Password (OTP) to verify your email address:</p>
           <div style="background-color: #f3f4f6; padding: 15px; border-radius: 6px; text-align: center; margin: 20px 0;">

@@ -85,7 +85,7 @@ export default function InternshipDetail() {
       <div className="id-header">
         <button
           className="if-back-btn"
-          onClick={() => navigate(`/${adminPath}/internships`)}
+          onClick={() => navigate(`/${adminPath}/students/internships`)}
         >
           <ChevronLeft size={18} />
           Back
@@ -99,7 +99,7 @@ export default function InternshipDetail() {
         <div className="id-header-actions">
           <button
             className="admin-btn-secondary"
-            onClick={() => navigate(`/${adminPath}/internships/${id}/edit`)}
+            onClick={() => navigate(`/${adminPath}/students/internships/${id}/edit`)}
           >
             <Edit size={16} />
             Edit

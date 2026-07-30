@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../AdminAuthContext';
 import {
   LayoutDashboard,
@@ -12,6 +12,7 @@ import {
   Settings,
   Shield,
   X,
+  MessageSquare
 } from 'lucide-react';
 import './AdminSidebar.css';
 
@@ -19,15 +20,15 @@ const menuItems = [
   {
     label: 'Dashboard',
     icon: LayoutDashboard,
-    path: 'dashboard',
+    path: 'students/dashboard',
   },
   {
     label: 'Internships & Courses',
     icon: GraduationCap,
     children: [
-      { label: 'All Records', icon: List, path: 'internships' },
-      { label: 'Add New', icon: UserPlus, path: 'internships/new' },
-      { label: 'Certificates', icon: Award, path: 'internships?filter=certificates' },
+      { label: 'All Records', icon: List, path: 'students/internships' },
+      { label: 'Add New', icon: UserPlus, path: 'students/internships/new' },
+      { label: 'Certificates', icon: Award, path: 'students/internships?filter=certificates' },
     ],
   },
 ];
@@ -36,9 +37,24 @@ export default function AdminSidebar({ collapsed, mobileOpen, onToggle, onMobile
   const { admin, logout, adminPath } = useAuth();
   const location = useLocation();
 
-  function isActive(path) {
-    return location.pathname.includes(path);
-  }
+  const checkIsActive = (targetPath) => {
+    const currentPath = location.pathname;
+    const currentSearch = location.search;
+    
+    const [pathPart, searchPart] = targetPath.split('?');
+    
+    // Check if the current pathname matches the target pathname
+    const pathMatches = currentPath.endsWith(pathPart);
+    if (!pathMatches) return false;
+    
+    // If target has a query string, current must match it exactly
+    if (searchPart) {
+      return currentSearch === `?${searchPart}`;
+    }
+    
+    // If target has NO query string, current must have NO query string
+    return !currentSearch;
+  };
 
   return (
     <>
@@ -79,50 +95,46 @@ export default function AdminSidebar({ collapsed, mobileOpen, onToggle, onMobile
                     </div>
                   )}
                   {item.children.map((child) => (
-                    <NavLink
+                    <Link
                       key={child.path}
                       to={`/${adminPath}/${child.path}`}
-                      className={({ isActive: active }) =>
-                        `admin-sidebar-link ${active ? 'active' : ''}`
-                      }
+                      className={`admin-sidebar-link ${checkIsActive(child.path) ? 'active' : ''}`}
                       title={collapsed ? child.label : undefined}
                       onClick={onMobileClose}
                     >
                       <child.icon size={18} />
                       {!collapsed && <span>{child.label}</span>}
-                    </NavLink>
+                    </Link>
                   ))}
                 </div>
               );
             }
 
             return (
-              <NavLink
+              <Link
                 key={item.path}
                 to={`/${adminPath}/${item.path}`}
-                className={({ isActive: active }) =>
-                  `admin-sidebar-link ${active ? 'active' : ''}`
-                }
+                className={`admin-sidebar-link ${checkIsActive(item.path) ? 'active' : ''}`}
                 title={collapsed ? item.label : undefined}
                 onClick={onMobileClose}
               >
                 <item.icon size={18} />
                 {!collapsed && <span>{item.label}</span>}
-              </NavLink>
+              </Link>
             );
           })}
         </nav>
 
         {/* Bottom section */}
         <div className="admin-sidebar-bottom">
-          <NavLink
+          <Link
             to={`/${adminPath}/settings`}
             className="admin-sidebar-link"
             title={collapsed ? 'Settings' : undefined}
           >
             <Settings size={18} />
             {!collapsed && <span>Settings</span>}
-          </NavLink>
+          </Link>
 
           <button className="admin-sidebar-link logout-btn" onClick={logout}>
             <LogOut size={18} />

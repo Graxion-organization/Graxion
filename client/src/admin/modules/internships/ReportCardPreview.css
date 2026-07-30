@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800&display=swap');
 /* ============================================
    GRAXION — Report Card Print Styles
    ============================================ */
@@ -43,9 +44,6 @@
     text-align: center;
     margin-bottom: 25px;
   }
-  
-  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800&display=swap');
-
   .rc-logo {
     display: block;
     margin: 0 auto 5px;

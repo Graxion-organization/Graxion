@@ -117,7 +117,7 @@ router.get('/dashboard', protectStudent, async (req, res) => {
       success: true,
       data: allInternships.map(i => ({
         ...i.toObject(),
-        issuedBy: 'Graxion Technologies'
+        issuedBy: 'Graxion'
       })),
     });
   } catch (error) {

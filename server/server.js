@@ -8,6 +8,8 @@ import adminRoutes from './routes/admin.js';
 import internshipRoutes from './routes/internships.js';
 import verifyRoutes from './routes/verify.js';
 import studentRoutes from './routes/student.js';
+import { createProxyMiddleware } from 'http-proxy-middleware';
+import { protect } from './middleware/auth.js';
 
 // Load env vars from root directory
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -36,6 +38,23 @@ app.use(cors({
     }
   },
   credentials: true,
+}));
+
+// Flow API Proxy (Protected by Graxion Admin Auth)
+app.use('/api/flow', protect, createProxyMiddleware({
+  target: process.env.FLOW_API_URL || 'http://localhost:4000',
+  changeOrigin: true,
+  pathRewrite: {
+    '^/api/flow': '/api', // Rewrite /api/flow to /api for the target server
+  },
+  onProxyReq: (proxyReq, req, res) => {
+    // Inject Graxion proxy secret to bypass Flow backend JWT check
+    if (process.env.GRAXION_PROXY_SECRET) {
+      proxyReq.setHeader('x-graxion-proxy-secret', process.env.GRAXION_PROXY_SECRET);
+    }
+    // Remove the Graxion Authorization header so Flow backend doesn't try to parse it
+    proxyReq.removeHeader('Authorization');
+  }
 }));
 
 // Body parser

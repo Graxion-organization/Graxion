@@ -185,7 +185,7 @@ export default function Verify() {
               </div>
               <h2>Certificate Verified ✓</h2>
               <p className="verify-valid-msg">
-                This certificate has been verified as authentic and was issued by Graxion Technologies.
+                This certificate has been verified as authentic and was issued by Graxion.
               </p>
 
               <div className="verify-details-card">
@@ -292,7 +292,7 @@ export default function Verify() {
               </div>
               <h2>{certList.length} Record(s) Found ✓</h2>
               <p className="verify-valid-msg">
-                These records have been verified as authentic and were issued by Graxion Technologies.
+                These records have been verified as authentic and were issued by Graxion.
               </p>
 
               <div className="verify-multi-list">
@@ -327,7 +327,7 @@ export default function Verify() {
 
           {/* Footer */}
           <div className="verify-footer">
-            <p>© {new Date().getFullYear()} Graxion Technologies. All certificates are verified against our secure database.</p>
+            <p>© {new Date().getFullYear()} Graxion. All certificates are verified against our secure database.</p>
           </div>
         </div>
       </div>

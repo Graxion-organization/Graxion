@@ -31,7 +31,7 @@ router.get('/:certificateId', async (req, res) => {
       message: 'Certificate is valid and verified',
       data: {
         ...internship.toObject(),
-        issuedBy: 'Graxion Technologies',
+        issuedBy: 'Graxion',
       },
     });
   } catch (error) {
@@ -70,7 +70,7 @@ router.post('/by-student-id', async (req, res) => {
       message: `${internships.length} certificate(s) found`,
       data: internships.map((i) => ({
         ...i.toObject(),
-        issuedBy: 'Graxion Technologies',
+        issuedBy: 'Graxion',
       })),
     });
   } catch (error) {
@@ -109,7 +109,7 @@ router.post('/by-email', async (req, res) => {
       message: `${internships.length} certificate(s) found`,
       data: internships.map((i) => ({
         ...i.toObject(),
-        issuedBy: 'Graxion Technologies',
+        issuedBy: 'Graxion',
       })),
     });
   } catch (error) {

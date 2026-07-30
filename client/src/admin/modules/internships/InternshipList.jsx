@@ -182,14 +182,14 @@ export default function InternshipList() {
           <button
             className="il-action-btn"
             title="View"
-            onClick={() => navigate(`/${adminPath}/internships/${row._id}`)}
+            onClick={() => navigate(`/${adminPath}/students/internships/${row._id}`)}
           >
             <Eye size={15} />
           </button>
           <button
             className="il-action-btn"
             title="Edit"
-            onClick={() => navigate(`/${adminPath}/internships/${row._id}/edit`)}
+            onClick={() => navigate(`/${adminPath}/students/internships/${row._id}/edit`)}
           >
             <Edit size={15} />
           </button>
@@ -216,7 +216,7 @@ export default function InternshipList() {
         </div>
         <button
           className="admin-btn-primary"
-          onClick={() => navigate(`/${adminPath}/internships/new`)}
+          onClick={() => navigate(`/${adminPath}/students/internships/new`)}
         >
           <UserPlus size={18} />
           Add New
@@ -267,7 +267,7 @@ export default function InternshipList() {
         selectedRows={selectedRows}
         onSelectRow={handleSelectRow}
         onSelectAll={handleSelectAll}
-        onRowClick={(row) => navigate(`/${adminPath}/internships/${row._id}`)}
+        onRowClick={(row) => navigate(`/${adminPath}/students/internships/${row._id}`)}
         searchPlaceholder="Search by name, ID, email..."
         emptyMessage="No internship records found. Click 'Add New' to create one."
       />

@@ -54,7 +54,7 @@ export default function InternshipDashboard() {
         </div>
         <button
           className="admin-btn-primary"
-          onClick={() => navigate(`/${adminPath}/internships/new`)}
+          onClick={() => navigate(`/${adminPath}/students/internships/new`)}
         >
           <UserPlus size={18} />
           Add New Record
