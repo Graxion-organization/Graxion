@@ -247,7 +247,7 @@
 .cert-signature {
   position: absolute;
   left: 0;
-  bottom: 10px;
+  bottom: 0px;
   text-align: left;
   min-width: 180px;
 }
@@ -272,11 +272,10 @@
 
 /* Premium Gold Embossed Seal */
 .cert-seal {
-  position: absolute;
-  left: 280px;
-  bottom: 5px;
-  width: 90px;
-  height: 90px;
+  position: relative;
+  width: 75px;
+  height: 75px;
+  margin-bottom: 8px;
   flex-shrink: 0;
 }
 
@@ -295,17 +294,17 @@
 }
 
 .cert-seal-text {
-  font-size: 0.55rem;
-  letter-spacing: 0.15em;
+  font-size: 0.45rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #5d4010; /* Dark gold/bronze color */
   font-weight: 800;
   line-height: 1;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 .cert-seal-icon {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-weight: 900;
   color: #5d4010;
   line-height: 1;

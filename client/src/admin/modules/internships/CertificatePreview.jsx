@@ -164,26 +164,31 @@ export default function CertificatePreview({ data, onClose }) {
 
         <div className="cert-bottom">
           <div className="cert-signature">
+            {/* Seal - positioned above signature */}
+            <div className="cert-seal">
+              <div className="cert-seal-inner">
+                <span className="cert-seal-text">VERIFIED</span>
+                <span className="cert-seal-icon">G</span>
+              </div>
+            </div>
             <p className="cert-sig-name">Issued by</p>
             <p className="cert-sig-title">Graxion</p>
-          </div>
-
-          {/* Seal */}
-          <div className="cert-seal">
-            <div className="cert-seal-inner">
-              <span className="cert-seal-text">VERIFIED</span>
-              <span className="cert-seal-icon">G</span>
-            </div>
           </div>
 
           <div className="cert-qr-section">
             <div className="cert-qr-box">
               <QRCodeSVG
                 value={verifyUrl}
-                size={90}
+                size={80}
                 bgColor="transparent"
                 fgColor="#00d4ff"
                 level="H"
+                imageSettings={{
+                  src: "/logo.png",
+                  height: 16,
+                  width: 16,
+                  excavate: true
+                }}
               />
             </div>
             <p className="cert-qr-label">Scan to Verify</p>
