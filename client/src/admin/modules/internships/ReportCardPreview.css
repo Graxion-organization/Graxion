@@ -397,17 +397,13 @@
 
 /* Responsiveness for viewing on small screens */
 @media screen and (max-width: 850px) {
-  .rc-container {
-    transform: scale(calc((100vw - 64px) / 794)); /* 794px is roughly 210mm. 64px accounts for padding */
-    transform-origin: top center;
-    margin-bottom: calc(-1123px * (1 - ((100vw - 64px) / 794)));
+  .rc-wrapper {
+    zoom: calc((100vw - 64px) / 794); /* 794px is A4 width. 64px accounts for padding */
   }
 }
 @media screen and (max-width: 480px) {
-  .rc-container {
-    transform: scale(calc((100vw - 40px) / 794));
-    transform-origin: top center;
-    margin-bottom: calc(-1123px * (1 - ((100vw - 40px) / 794)));
+  .rc-wrapper {
+    zoom: calc((100vw - 40px) / 794);
   }
 }
 
