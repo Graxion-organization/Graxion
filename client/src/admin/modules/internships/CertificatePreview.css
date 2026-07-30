@@ -23,8 +23,8 @@
 /* ── Certificate Container ── */
 .cert-container {
   position: relative;
-  width: 800px; /* Fixed width for scaling */
-  height: 566px; /* Fixed landscape height (A4 proportion) */
+  width: 1123px; /* A4 Landscape width at 96 DPI */
+  height: 794px; /* A4 Landscape height at 96 DPI */
   flex-shrink: 0;
   background: #ffffff;
   border-radius: 12px;

@@ -14,7 +14,7 @@ export default function CertificatePreview({ data, onClose }) {
     if (!certRef.current) return;
     try {
       const canvas = await html2canvas(certRef.current, {
-        scale: 2,
+        scale: 3.125, // 300 DPI Export Scale (300 / 96)
         backgroundColor: '#ffffff',
         useCORS: true,
       });
@@ -83,8 +83,8 @@ export default function CertificatePreview({ data, onClose }) {
 
   return (
     <ResponsiveDocumentViewer 
-      documentWidth={800} 
-      documentHeight={566}
+      documentWidth={1123} 
+      documentHeight={794}
       actions={
         <>
           <button className="admin-btn-secondary verify-btn-doc" onClick={handleDownload}>
