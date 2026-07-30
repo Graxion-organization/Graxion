@@ -94,6 +94,9 @@
   align-items: center;
   justify-content: center;
   min-height: 450px;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
 }
 
 .connection-diagram::before {
@@ -117,7 +120,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  position: absolute; /* absolute for perfect alignment matching orbits */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 2;
   box-shadow: 0 0 40px rgba(124, 58, 237, 0.2);
 }
@@ -148,6 +154,28 @@
   height: 420px;
   animation-duration: 35s;
   animation-direction: reverse;
+}
+
+/* ── Mobile responsiveness for orbits ── */
+@media (max-width: 480px) {
+  .connection-diagram {
+    min-height: 350px;
+  }
+  .connection-orbit.inner {
+    width: 200px;
+    height: 200px;
+  }
+  .connection-orbit.outer {
+    width: 320px;
+    height: 320px;
+  }
+  .connection-center {
+    width: 80px;
+    height: 80px;
+  }
+  .connection-center-text {
+    font-size: var(--text-small);
+  }
 }
 
 .connection-node {
