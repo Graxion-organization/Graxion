@@ -335,15 +335,12 @@ export default function Verify() {
       {/* Document Viewer Modal */}
       {viewingDoc && (
         <div className="verify-doc-modal">
-          <div className="verify-doc-modal-content">
-            <button className="verify-doc-close" onClick={() => setViewingDoc(null)}>
-              <X size={24} />
-            </button>
+          <div className={`verify-doc-modal-content ${viewingDoc.type}`}>
             <div className="verify-doc-scrollable">
               {viewingDoc.type === 'certificate' ? (
-                <CertificatePreview data={viewingDoc.data} />
+                <CertificatePreview data={viewingDoc.data} onClose={() => setViewingDoc(null)} />
               ) : (
-                <ReportCardPreview data={viewingDoc.data} />
+                <ReportCardPreview data={viewingDoc.data} onClose={() => setViewingDoc(null)} />
               )}
             </div>
           </div>

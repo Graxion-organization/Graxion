@@ -521,13 +521,19 @@
 .verify-doc-modal-content {
   position: relative;
   width: 100%;
-  max-width: 1000px;
   max-height: 95vh;
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
+  background: transparent;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+}
+
+.verify-doc-modal-content.certificate {
+  max-width: 840px;
+}
+
+.verify-doc-modal-content.report {
+  max-width: 840px;
 }
 
 .verify-doc-close {
@@ -557,6 +563,7 @@
   overflow-y: auto;
   padding: 20px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 

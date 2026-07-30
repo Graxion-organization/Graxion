@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import html2canvas from 'html2canvas';
-import { Download, Printer } from 'lucide-react';
+import { Download, Printer, X } from 'lucide-react';
 import ResponsiveDocumentViewer from './ResponsiveDocumentViewer';
 import './CertificatePreview.css';
 
-export default function CertificatePreview({ data }) {
+export default function CertificatePreview({ data, onClose }) {
   const certRef = useRef(null);
 
   const verifyUrl = `${window.location.origin}/internship/verify/${data.certificateId}`;
@@ -87,14 +87,20 @@ export default function CertificatePreview({ data }) {
       documentHeight={566}
       actions={
         <>
-          <button className="admin-btn-secondary" onClick={handleDownload}>
+          <button className="admin-btn-secondary verify-btn-doc" onClick={handleDownload}>
             <Download size={16} />
             Download PNG
           </button>
-          <button className="admin-btn-secondary" onClick={handlePrint}>
+          <button className="admin-btn-secondary verify-btn-doc" onClick={handlePrint}>
             <Printer size={16} />
             Print
           </button>
+          {onClose && (
+            <button className="admin-btn-secondary verify-btn-doc" onClick={onClose} style={{ borderColor: '#ef4444', color: '#ef4444' }}>
+              <X size={16} />
+              Close
+            </button>
+          )}
         </>
       }
     >
