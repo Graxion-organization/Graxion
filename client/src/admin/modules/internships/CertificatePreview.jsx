@@ -112,12 +112,6 @@ export default function CertificatePreview({ data, onClose }) {
         <div className="cert-corner cert-corner-bl" />
         <div className="cert-corner cert-corner-br" />
 
-        {/* Watermark */}
-        <div className="cert-watermark">
-          <img src="/logo.png" alt="" className="cert-watermark-logo" onError={(e) => { e.target.style.display='none' }} />
-          <div className="cert-watermark-text">GRAXION</div>
-        </div>
-
         {/* Gradient borders */}
         <div className="cert-border-top" />
         <div className="cert-border-bottom" />
@@ -140,28 +134,15 @@ export default function CertificatePreview({ data, onClose }) {
             {data.type === 'course' ? 'Course' : 'Internship'} Certificate
           </h1>
 
-          <p className="cert-text">This is to certify that</p>
+          <p className="cert-text-intro">This is to certify that</p>
 
           <h2 className="cert-name">{data.studentName}</h2>
 
-          <p className="cert-text">
-            has successfully completed the{' '}
-            <strong>{data.type === 'course' ? 'course' : 'internship'}</strong> program in
-          </p>
-
-          <h3 className="cert-program">{data.internshipTitle}</h3>
-
-          <p className="cert-domain-label">
-            Domain: <span className="cert-domain">{data.domain}</span>
-          </p>
-
-          <p className="cert-text">
-            during the period of{' '}
-            <strong>{formattedStartDate}</strong> to{' '}
-            <strong>{formattedEndDate}</strong>
-            {data.formattedDuration && (
-              <> ({data.formattedDuration})</>
-            )}
+          <p className="cert-desc-paragraph">
+            has successfully completed the <strong>{data.type === 'course' ? 'Course' : 'Internship'} Program</strong> in{' '}
+            <strong>{data.domain}</strong> as a <strong>{data.internshipTitle}</strong>. The program was conducted{' '}
+            from <strong>{formattedStartDate}</strong> to <strong>{formattedEndDate}</strong>{data.formattedDuration && ` (${data.formattedDuration})`}.{' '}
+            During this tenure, they demonstrated outstanding technical performance, dedication, and problem-solving skills.
           </p>
 
           {data.performanceRating && (

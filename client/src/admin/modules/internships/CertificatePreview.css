@@ -176,52 +176,37 @@
   letter-spacing: -0.01em;
 }
 
-.cert-text {
+.cert-text-intro {
   font-size: 1.15rem;
   color: #4b5563;
-  line-height: 1.7;
-  margin-bottom: 4px;
-}
-
-.cert-text strong {
-  color: #0a0e1a;
-  font-weight: 700;
+  margin-top: 15px;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
 }
 
 .cert-name {
   font-size: 3.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #7c3aed 0%, #bf953f 50%, #00d4ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 10px 0;
+  color: #7c3aed; /* Premium solid color to prevent background-clip canvas render bugs */
+  margin: 8px 0;
   letter-spacing: -0.01em;
   font-family: 'Playfair Display', 'Georgia', serif;
 }
 
-.cert-program {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #0a0e1a;
-  margin: 8px 0;
-  letter-spacing: -0.01em;
-}
-
-.cert-domain-label {
-  font-size: 1.05rem;
+.cert-desc-paragraph {
+  font-size: 1.1rem;
   color: #4b5563;
-  margin-bottom: 8px;
+  line-height: 1.8;
+  max-width: 880px; /* Restrict width to avoid left-right whitespace issues */
+  margin: 10px auto 20px;
+  text-align: center;
 }
 
-.cert-domain {
-  display: inline-block;
-  padding: 4px 14px;
-  background: rgba(124, 58, 237, 0.08);
-  border: 1px solid rgba(124, 58, 237, 0.15);
-  border-radius: 6px;
-  color: #7c3aed;
-  font-weight: 600;
+.cert-desc-paragraph strong {
+  color: #0a0e1a;
+  font-weight: 700;
 }
 
 /* Rating */
@@ -229,7 +214,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 6px 0 12px;
+  margin: 5px 0 10px;
   font-size: 1rem;
   color: #4b5563;
 }
@@ -248,18 +233,21 @@
   color: #f59e0b;
 }
 
-/* Bottom section */
+/* Bottom section - Positioned absolutely to prevent overlaps in canvas exports */
 .cert-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 15px;
-  padding-top: 20px;
+  position: absolute;
+  bottom: 40px;
+  left: 80px;
+  right: 80px;
+  height: 120px;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 15px;
 }
 
 .cert-signature {
+  position: absolute;
+  left: 0;
+  bottom: 10px;
   text-align: left;
   min-width: 180px;
 }
@@ -282,48 +270,11 @@
   line-height: 1.2;
 }
 
-/* QR Code */
-.cert-qr-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-.cert-qr-box {
-  padding: 8px;
-  background: #ffffff;
-  border: 1px solid rgba(191, 149, 63, 0.3);
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-}
-
-.cert-qr-label {
-  font-size: 0.7rem;
-  color: #6b7280;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-
-/* Details */
-.cert-details {
-  text-align: right;
-  min-width: 200px;
-}
-
-.cert-details p {
-  font-size: 0.8rem;
-  color: #4b5563;
-  margin-bottom: 4px;
-}
-
-.cert-details strong {
-  color: #0a0e1a;
-}
-
 /* Premium Gold Embossed Seal */
 .cert-seal {
+  position: absolute;
+  left: 280px;
+  bottom: 5px;
   width: 90px;
   height: 90px;
   flex-shrink: 0;
@@ -358,6 +309,52 @@
   font-weight: 900;
   color: #5d4010;
   line-height: 1;
+}
+
+/* QR Code */
+.cert-qr-section {
+  position: absolute;
+  left: 428px; /* Perfectly centered horizontal: 963/2 - 53px = 428.5px */
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.cert-qr-box {
+  padding: 8px;
+  background: #ffffff;
+  border: 1px solid rgba(191, 149, 63, 0.3);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+}
+
+.cert-qr-label {
+  font-size: 0.7rem;
+  color: #6b7280;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Details */
+.cert-details {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  text-align: right;
+  min-width: 220px;
+}
+
+.cert-details p {
+  font-size: 0.8rem;
+  color: #4b5563;
+  margin-bottom: 4px;
+}
+
+.cert-details strong {
+  color: #0a0e1a;
 }
 
 /* ── Print Styles ── */
