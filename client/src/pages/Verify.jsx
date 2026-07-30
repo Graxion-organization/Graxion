@@ -34,11 +34,30 @@ export default function Verify() {
   
   const [viewingDoc, setViewingDoc] = useState(null); // { type: 'certificate' | 'report', data: object }
 
-  // Auto-verify if certificate ID is in URL
+  // Auto-verify if certificate ID is in URL (path param or query param)
   useEffect(() => {
-    if (paramCertId) {
-      setSearchId(paramCertId);
-      handleVerify(paramCertId, 'certificate');
+    let id = paramCertId;
+    let type = 'certificate';
+
+    // Check query parameters if no path parameter exists
+    if (!id) {
+      const searchParams = new URLSearchParams(window.location.search);
+      id = searchParams.get('id') || searchParams.get('certificateId') || searchParams.get('studentId');
+      if (searchParams.get('studentId')) {
+        type = 'student';
+      }
+    }
+
+    if (id) {
+      const cleanId = id.trim();
+      setSearchId(cleanId);
+      
+      // Auto-detect search type based on typical ID prefixes
+      const isStudent = cleanId.includes('-STD-') || cleanId.includes('-STUDENT-') || cleanId.startsWith('GRX-STD');
+      const detectedType = isStudent ? 'student' : type;
+      
+      setSearchType(detectedType);
+      handleVerify(cleanId, detectedType);
     }
   }, [paramCertId]);
 
