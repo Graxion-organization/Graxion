@@ -186,6 +186,14 @@ export default function CertificatePreview({ data, onClose }) {
               <p className="cert-sig-title">Graxion</p>
             </div>
 
+            {/* Seal */}
+            <div className="cert-seal">
+              <div className="cert-seal-inner">
+                <span className="cert-seal-text">VERIFIED</span>
+                <span className="cert-seal-icon">G</span>
+              </div>
+            </div>
+
             <div className="cert-qr-section">
               <div className="cert-qr-box">
                 <QRCodeSVG
@@ -203,14 +211,6 @@ export default function CertificatePreview({ data, onClose }) {
               <p><strong>Certificate ID:</strong> {data.certificateId}</p>
               <p><strong>Student ID:</strong> {data.studentId}</p>
               <p><strong>Issue Date:</strong> {issuedDate}</p>
-            </div>
-          </div>
-
-          {/* Seal */}
-          <div className="cert-seal">
-            <div className="cert-seal-inner">
-              <span className="cert-seal-text">VERIFIED</span>
-              <span className="cert-seal-icon">G</span>
             </div>
           </div>
         </div>
