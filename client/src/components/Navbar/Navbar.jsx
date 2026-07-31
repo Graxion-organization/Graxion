@@ -49,6 +49,18 @@ export default function Navbar() {
     setMobileOpen(false);
   }, [location]);
 
+  const [hideLogo, setHideLogo] = useState(false);
+
+  useEffect(() => {
+    const handleVisibility = (e) => {
+      setHideLogo(e.detail.isVisible);
+    };
+    window.addEventListener("footer-logo-visibility", handleVisibility);
+    return () => {
+      window.removeEventListener("footer-logo-visibility", handleVisibility);
+    };
+  }, []);
+
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -58,7 +70,7 @@ export default function Navbar() {
     <>
       <nav className={`navbar ${scrolled ? "scrolled" : ""} ${isHidden ? "hidden" : ""}`} id="main-nav">
         <div className="navbar-inner">
-          <Link to="/" className="navbar-logo" aria-label="Graxion Home">
+          <Link to="/" className={`navbar-logo ${hideLogo ? "hide-logo" : ""}`} aria-label="Graxion Home">
             <div style={{ backgroundColor: 'white', padding: '4px', borderRadius: '6px', display: 'flex' }}>
               <img src="/logo.png" alt="Graxion Icon" style={{ height: '24px' }} />
             </div>

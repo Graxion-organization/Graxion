@@ -36,7 +36,14 @@
   align-items: center;
   gap: var(--space-2);
   text-decoration: none;
-  transition: opacity var(--duration-fast) var(--ease-out);
+  transition: opacity var(--duration-normal) var(--ease-out), transform var(--duration-normal) var(--ease-out), visibility var(--duration-normal) var(--ease-out);
+}
+
+.navbar-logo.hide-logo {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-8px) scale(0.95);
 }
 
 .navbar-logo:hover {

@@ -1,16 +1,42 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ExternalLink, Globe, Users, Mail } from "lucide-react";
 import { footerLinks } from "../../data/ecosystem";
 import "./Footer.css";
 
 export default function Footer() {
+  const logoRef = useRef(null);
+
+  useEffect(() => {
+    const element = logoRef.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const isVisible = entry.isIntersecting;
+        const event = new CustomEvent("footer-logo-visibility", {
+          detail: { isVisible }
+        });
+        window.dispatchEvent(event);
+      },
+      {
+        threshold: 0.05,
+      }
+    );
+
+    observer.observe(element);
+    return () => {
+      observer.unobserve(element);
+    };
+  }, []);
+
   return (
     <footer className="footer" id="footer">
       <div className="container">
         <div className="footer-grid">
           {/* Brand Column */}
           <div className="footer-brand">
-            <div className="footer-logo">
+            <div className="footer-logo" ref={logoRef}>
               <div style={{ backgroundColor: 'white', padding: '4px', borderRadius: '6px', display: 'flex' }}>
                 <img src="/logo.png" alt="Graxion Icon" style={{ height: '24px' }} />
               </div>
