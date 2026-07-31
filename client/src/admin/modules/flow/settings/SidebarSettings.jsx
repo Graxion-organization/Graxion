@@ -24,6 +24,9 @@ export default function SidebarSettings() {
     { key: 'Auto Comments', label: 'Auto Comments' },
     { key: 'App Store', label: 'App Store' },
     { key: 'Meta Quality', label: 'Meta Quality' },
+    { key: 'Sales Partner', label: 'Sales Partner' },
+    { key: 'Settings', label: 'Settings' },
+    { key: 'Billing', label: 'Billing' },
   ];
 
   useEffect(() => {
