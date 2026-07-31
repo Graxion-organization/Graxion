@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { adminAPI } from '.././services/api';
 import toast from 'react-hot-toast';
-import { Save, Check, Settings2, LayoutDashboard, MonitorSmartphone, EyeOff, FlaskConical } from 'lucide-react';
+import { Check, Settings2, LayoutDashboard, MonitorSmartphone, EyeOff, FlaskConical } from 'lucide-react';
 
 export default function SidebarSettings() {
   const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
   const [settings, setSettings] = useState({});
 
   const sidebarSections = [
@@ -52,22 +51,25 @@ export default function SidebarSettings() {
     }
   };
 
-  const handleToggle = (key) => {
-    setSettings(prev => ({
-      ...prev,
-      [key]: !prev[key]
-    }));
-  };
+  const handleToggle = async (key) => {
+    const newVal = settings[key] === false ? true : false;
+    const newSettings = {
+      ...settings,
+      [key]: !settings[key]
+    };
+    
+    setSettings(newSettings);
 
-  const handleSave = async () => {
-    setSaving(true);
     try {
-      await adminAPI.updateSetting('sidebar_settings', settings);
-      toast.success('Sidebar settings updated successfully');
+      await adminAPI.updateSetting('sidebar_settings', newSettings);
+      toast.success(`${key} sidebar section ${!newVal ? 'enabled' : 'disabled'} successfully!`);
     } catch (err) {
-      toast.error('Failed to save settings');
-    } finally {
-      setSaving(false);
+      toast.error('Failed to update setting');
+      // Revert state if api fails
+      setSettings(prev => ({
+        ...prev,
+        [key]: newVal
+      }));
     }
   };
 
@@ -91,15 +93,6 @@ export default function SidebarSettings() {
             Toggle visibility of sidebar sections across the main application. Sections turned off will remain visible to Beta Testers.
           </p>
         </div>
-        
-        <button
-          onClick={handleSave}
-          disabled={saving}
-          className="flex items-center gap-2 px-4 py-2 bg-brand-500 text-white rounded-xl font-medium hover:bg-brand-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-brand-500/20"
-        >
-          {saving ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Save size={16} />}
-          {saving ? 'Saving...' : 'Save Changes'}
-        </button>
       </div>
 
       <div className="bg-[#0a0e1a]/50 border border-white/[0.06] rounded-2xl overflow-hidden backdrop-blur-xl">
