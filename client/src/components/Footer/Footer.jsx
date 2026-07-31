@@ -60,9 +60,9 @@ export default function Footer() {
             <h3 className="footer-column-title">Ecosystem</h3>
             <div className="footer-column-links">
               {footerLinks.ecosystem.map((link) => (
-                <a key={link.label} href={link.href} className="footer-column-link">
+                <Link key={link.label} to={link.href} className="footer-column-link">
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -84,9 +84,9 @@ export default function Footer() {
             <h3 className="footer-column-title">Resources</h3>
             <div className="footer-column-links">
               {footerLinks.resources.map((link) => (
-                <a key={link.label} href={link.href} className="footer-column-link">
+                <Link key={link.label} to={link.href} className="footer-column-link">
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>

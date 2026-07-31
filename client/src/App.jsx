@@ -11,6 +11,30 @@ import Terms from "./pages/Terms";
 import Verify from "./pages/Verify";
 import StudentLogin from "./pages/StudentPortal/StudentLogin";
 import StudentDashboard from "./pages/StudentPortal/StudentDashboard";
+
+// Ecosystem pages
+import ArtificialIntelligence from "./pages/ArtificialIntelligence";
+import BusinessSoftware from "./pages/BusinessSoftware";
+import CloudComputing from "./pages/CloudComputing";
+import CyberSecurity from "./pages/CyberSecurity";
+import DeveloperPlatforms from "./pages/DeveloperPlatforms";
+import Education from "./pages/Education";
+
+// Company pages
+import Careers from "./pages/Careers";
+import Press from "./pages/Press";
+import Blog from "./pages/Blog";
+
+// Resources pages
+import Documentation from "./pages/Documentation";
+import ApiReference from "./pages/ApiReference";
+import Status from "./pages/Status";
+import Community from "./pages/Community";
+
+// Legal pages
+import CookiePolicy from "./pages/CookiePolicy";
+import Security from "./pages/Security";
+
 import { AuthProvider } from "./admin/AdminAuthContext";
 import AdminLogin from "./admin/AdminLogin";
 import AdminLayout from "./admin/AdminLayout";
@@ -47,6 +71,29 @@ export default function App() {
                   <Route path="/internship/verify/:certificateId" element={<Verify />} />
                   <Route path="/student/login" element={<StudentLogin />} />
                   <Route path="/student/dashboard" element={<StudentDashboard />} />
+                  
+                  {/* Ecosystem Routes */}
+                  <Route path="/ecosystem/ai" element={<ArtificialIntelligence />} />
+                  <Route path="/ecosystem/business" element={<BusinessSoftware />} />
+                  <Route path="/ecosystem/cloud" element={<CloudComputing />} />
+                  <Route path="/ecosystem/security" element={<CyberSecurity />} />
+                  <Route path="/ecosystem/developer" element={<DeveloperPlatforms />} />
+                  <Route path="/ecosystem/education" element={<Education />} />
+
+                  {/* Company Routes */}
+                  <Route path="/careers" element={<Careers />} />
+                  <Route path="/press" element={<Press />} />
+                  <Route path="/blog" element={<Blog />} />
+
+                  {/* Resources Routes */}
+                  <Route path="/resources/documentation" element={<Documentation />} />
+                  <Route path="/resources/api-reference" element={<ApiReference />} />
+                  <Route path="/resources/status" element={<Status />} />
+                  <Route path="/resources/community" element={<Community />} />
+
+                  {/* Legal/Security Routes */}
+                  <Route path="/cookie-policy" element={<CookiePolicy />} />
+                  <Route path="/security" element={<Security />} />
                 </Routes>
               </main>
               <Footer />
