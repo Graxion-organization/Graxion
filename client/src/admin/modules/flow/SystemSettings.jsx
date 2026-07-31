@@ -392,7 +392,16 @@ const SystemSettings = () => {
                         onClick={async () => {
                           const newVal = !currentVal;
                           const newSettingsObj = { ...(settingObj.value || {}), [label]: newVal };
-                          await handleUpdate("sidebar_settings", newSettingsObj);
+                          setSaving(true);
+                          try {
+                            await adminAPI.updateSetting("sidebar_settings", newSettingsObj);
+                            toast.success(`${label} sidebar section ${newVal ? 'enabled' : 'disabled'} successfully!`);
+                            fetchSettings();
+                          } catch (err) {
+                            toast.error("Failed to update setting");
+                          } finally {
+                            setSaving(false);
+                          }
                         }}
                         disabled={saving}
                         className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors focus:outline-none ${
