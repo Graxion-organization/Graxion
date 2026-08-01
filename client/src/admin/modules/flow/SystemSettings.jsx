@@ -13,7 +13,8 @@ import {
   Key,
   Database,
   Mail,
-  LayoutDashboard
+  LayoutDashboard,
+  CreditCard
 } from "lucide-react";
 import { adminAPI, socialHubAPI } from "./services/api";
 import toast from "react-hot-toast";
@@ -82,6 +83,12 @@ const SystemSettings = () => {
       title: "AI Configuration",
       icon: Cpu,
       keys: ['ai_responses_enabled', 'default_ai_model', 'global_system_prompt']
+    },
+    {
+      id: "payments",
+      title: "Payment Gateways",
+      icon: CreditCard,
+      keys: ['razorpay_enabled', 'cashfree_enabled']
     },
     {
       id: "social",
