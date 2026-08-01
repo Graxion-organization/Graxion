@@ -77,6 +77,7 @@ const sidebarGroups = [
         { name: "Core System", icon: Settings, path: "settings/core" },
         { name: "Branding", icon: Globe, path: "settings/branding" },
         { name: "Sidebar Customization", icon: LayoutDashboard, path: "settings/sidebar" },
+        { name: "Payments Config", icon: CreditCard, path: "settings/payments" },
         { name: "AI Configuration", icon: Cpu, path: "settings/ai" },
         { name: "Social Platforms", icon: Zap, path: "settings/social" },
         { name: "Email Templates", icon: Mail, path: "settings/email" },
