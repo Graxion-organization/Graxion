@@ -32,9 +32,57 @@ import {
   Globe,
   User
 } from "lucide-react";
-import { adminAPI } from "./services/api";
+import { adminAPI, whatsappAPI } from "./services/api";
 import { toast } from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
+
+const WhatsAppAccountDisplay = ({ account }) => {
+  const [rating, setRating] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchRating = async () => {
+      try {
+        const res = await whatsappAPI.getQualityRating(account._id || account.id);
+        const r = res.data?.qualityRating || res.data?.data?.qualityRating || res.data?.quality_rating || 'UNKNOWN';
+        setRating(r);
+      } catch (err) {
+        console.error("Failed to fetch quality rating", err);
+        setRating('ERROR');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchRating();
+  }, [account]);
+
+  const getRatingColor = (r) => {
+    if (!r) return 'text-gray-500 bg-gray-500/10';
+    const lowerR = r.toLowerCase();
+    if (lowerR === 'green' || lowerR === 'high') return 'text-emerald-500 bg-emerald-500/10';
+    if (lowerR === 'yellow' || lowerR === 'medium') return 'text-yellow-500 bg-yellow-500/10';
+    if (lowerR === 'red' || lowerR === 'low') return 'text-red-500 bg-red-500/10';
+    return 'text-gray-400 bg-white/5';
+  };
+
+  return (
+    <div className="flex flex-col gap-1.5 bg-white/[0.02] border border-white/5 px-2.5 py-2 rounded">
+      <p className="text-[10px] font-mono text-gray-400 truncate">
+        {account.name || account.channelName || account.phoneNumber || account.username || account._id}
+      </p>
+      <div className="flex items-center justify-between">
+        <span className="text-[9px] font-bold uppercase text-gray-500">Quality</span>
+        {loading ? (
+          <span className="text-[9px] text-gray-400 animate-pulse">Checking...</span>
+        ) : (
+          <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${getRatingColor(rating)}`}>
+            {rating}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+};
 
 const UserManagement = () => {
   const [searchParams] = useSearchParams();
@@ -709,9 +757,13 @@ const UserManagement = () => {
                               <h4 className="text-sm font-bold text-white">{platform.name}</h4>
                               <div className="mt-2 space-y-1.5 max-h-20 overflow-y-auto custom-scrollbar">
                                 {platform.accounts.map((acc, i) => (
-                                  <p key={acc._id || i} className="text-[10px] font-mono text-gray-400 truncate bg-white/[0.02] border border-white/5 px-2 py-1 rounded">
-                                    {acc.name || acc.channelName || acc.channelId || acc.phoneNumber || acc.username || acc._id}
-                                  </p>
+                                  platform.key === 'whatsapp' ? (
+                                    <WhatsAppAccountDisplay key={acc._id || i} account={acc} />
+                                  ) : (
+                                    <p key={acc._id || i} className="text-[10px] font-mono text-gray-400 truncate bg-white/[0.02] border border-white/5 px-2 py-1 rounded">
+                                      {acc.name || acc.channelName || acc.channelId || acc.phoneNumber || acc.username || acc._id}
+                                    </p>
+                                  )
                                 ))}
                                 {!isConnected && (
                                   <p className="text-[10px] text-gray-500 italic">No credentials linked yet.</p>
