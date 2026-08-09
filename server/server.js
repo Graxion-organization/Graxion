@@ -23,6 +23,7 @@ const app = express();
 // CORS
 const allowedOrigins = [
   'http://localhost:5173',
+  'http://localhost:5174', // Graxion AI frontend
   'https://graxion.in',
   'https://www.graxion.in',
   process.env.CLIENT_URL && process.env.CLIENT_URL.replace(/\/$/, "") // Remove trailing slash if present
@@ -56,6 +57,15 @@ app.use('/api/flow', protect, createProxyMiddleware({
       // Remove the Graxion Authorization header so Flow backend doesn't try to parse it
       proxyReq.removeHeader('Authorization');
     }
+  }
+}));
+
+// AI API Proxy (Protected by Graxion Admin Auth)
+app.use('/api/ai', protect, createProxyMiddleware({
+  target: process.env.AI_API_URL || 'http://localhost:5001',
+  changeOrigin: true,
+  pathRewrite: {
+    '^/api/ai': '/api', // Rewrite /api/ai to /api for the target server
   }
 }));
 
