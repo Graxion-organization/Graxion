@@ -700,42 +700,48 @@ const UserManagement = () => {
                           key: 'whatsapp', 
                           icon: Smartphone, 
                           color: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.05)]',
-                          accounts: userDetails?.accounts?.whatsapp || [] 
+                          accounts: userDetails?.accounts?.whatsapp || [],
+                          permissions: ['business_management', 'whatsapp_business_management', 'whatsapp_business_messaging']
                         },
                         { 
                           name: 'Telegram Bot API', 
                           key: 'telegram', 
                           icon: Send, 
                           color: 'bg-blue-500/10 text-blue-500 border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.05)]',
-                          accounts: userDetails?.accounts?.telegram || [] 
+                          accounts: userDetails?.accounts?.telegram || [],
+                          permissions: ['manage_bot', 'send_messages', 'read_messages']
                         },
                         { 
                           name: 'Instagram Direct', 
                           key: 'instagram', 
                           icon: Camera, 
                           color: 'bg-pink-500/10 text-pink-500 border-pink-500/20 shadow-[0_0_15px_rgba(236,72,153,0.05)]',
-                          accounts: userDetails?.accounts?.instagram || [] 
+                          accounts: userDetails?.accounts?.instagram || [],
+                          permissions: ['instagram_basic', 'instagram_manage_messages', 'pages_show_list']
                         },
                         { 
                           name: 'Facebook Pages', 
                           key: 'facebook', 
                           icon: Globe, 
                           color: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20 shadow-[0_0_15px_rgba(99,102,241,0.05)]',
-                          accounts: userDetails?.accounts?.facebook || [] 
+                          accounts: userDetails?.accounts?.facebook || [],
+                          permissions: ['business_management', 'pages_manage_metadata', 'pages_messaging']
                         },
                         { 
                           name: 'LinkedIn Professional', 
                           key: 'linkedin', 
                           icon: MessageSquare, 
                           color: 'bg-sky-500/10 text-sky-400 border-sky-500/20 shadow-[0_0_15px_rgba(14,165,233,0.05)]',
-                          accounts: userDetails?.accounts?.linkedin || [] 
+                          accounts: userDetails?.accounts?.linkedin || [],
+                          permissions: ['r_liteprofile', 'w_member_social', 'rw_organization_admin']
                         },
                         { 
                           name: 'YouTube Channels', 
                           key: 'youtube', 
                           icon: Video, 
                           color: 'bg-rose-500/10 text-rose-500 border-rose-500/20 shadow-[0_0_15px_rgba(244,63,94,0.05)]',
-                          accounts: userDetails?.accounts?.youtube || [] 
+                          accounts: userDetails?.accounts?.youtube || [],
+                          permissions: ['youtube.readonly', 'youtube.upload']
                         }
                       ].map(platform => {
                         const PlatformIcon = platform.icon;
@@ -755,7 +761,16 @@ const UserManagement = () => {
 
                             <div className="mt-4">
                               <h4 className="text-sm font-bold text-white">{platform.name}</h4>
-                              <div className="mt-2 space-y-1.5 max-h-20 overflow-y-auto custom-scrollbar">
+                              
+                              <div className="mt-1.5 flex flex-wrap gap-1">
+                                {platform.permissions.map((perm, idx) => (
+                                  <span key={idx} className="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 font-mono tracking-wider">
+                                    {perm}
+                                  </span>
+                                ))}
+                              </div>
+
+                              <div className="mt-3 space-y-1.5 max-h-20 overflow-y-auto custom-scrollbar">
                                 {platform.accounts.map((acc, i) => (
                                   platform.key === 'whatsapp' ? (
                                     <WhatsAppAccountDisplay key={acc._id || i} account={acc} />
