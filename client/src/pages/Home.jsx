@@ -12,10 +12,10 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <title>Graxion — Building the Future of Technology</title>
+        <title>Graxion Flow — AI Automation & Social Media Ecosystem</title>
         <meta
           name="description"
-          content="Graxion is a global technology ecosystem building intelligent products across AI, Cloud, Cyber Security, Business Software, Education, Robotics, and more."
+          content="Graxion Flow is a powerful automation platform that helps you manage your YouTube comments, schedule Shorts, and automate workflows seamlessly with AI."
         />
       </Helmet>
       
