@@ -137,6 +137,9 @@ export default function Footer() {
             Technology.
           </p>
           <div className="footer-bottom-links">
+            <a href="https://flow.graxion.in/privacy" target="_blank" rel="noopener noreferrer" className="footer-bottom-link">
+              Graxion Flow Privacy
+            </a>
             <Link to="/privacy" className="footer-bottom-link">
               Privacy
             </Link>
