@@ -20,6 +20,16 @@
   background: var(--color-border);
 }
 
+.roadmap-progress-line {
+  position: absolute;
+  top: 0;
+  left: 24px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--color-accent-cyan), var(--color-accent-purple));
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+  z-index: 1;
+}
+
 .roadmap-item {
   position: relative;
   padding-left: var(--space-16);
@@ -92,7 +102,8 @@
 }
 
 @media (max-width: 640px) {
-  .roadmap-timeline::before {
+  .roadmap-timeline::before,
+  .roadmap-progress-line {
     left: 16px;
   }
   .roadmap-marker {

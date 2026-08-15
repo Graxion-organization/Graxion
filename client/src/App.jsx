@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import ScrollToTop from "./components/ScrollToTop";
@@ -108,6 +108,7 @@ export default function App() {
             <AuthProvider>
               <Routes>
                 <Route path="login" element={<AdminLogin />} />
+                <Route path="settings/*" element={<Navigate to={`/${ADMIN_PATH}/flow/settings`} replace />} />
                 <Route path="students/*" element={
                   <Routes>
                     <Route element={<AdminLayout />}>

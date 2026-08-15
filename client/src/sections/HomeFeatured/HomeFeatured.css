@@ -149,11 +149,27 @@
   .home-featured-visual {
     border-left: none;
     border-top: 1px solid var(--color-border);
+    transform: none !important;
+    min-height: 350px;
+  }
+  .home-featured-app-mockup {
+    width: 90%;
+    height: auto;
+    margin: var(--space-8) 0;
   }
 }
 
 @media (max-width: 640px) {
   .home-featured-content {
     padding: var(--space-8);
+  }
+  .home-featured-app-mockup {
+    width: 95%;
+  }
+  .mockup-body .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .mockup-body {
+    padding: var(--space-4);
   }
 }

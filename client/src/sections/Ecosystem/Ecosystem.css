@@ -25,40 +25,76 @@
 
 .ecosystem-card {
   position: relative;
-  padding: var(--space-8);
-  background: var(--color-bg-glass);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: var(--space-4);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-lg);
+  padding: 1px; /* space for the spotlight border */
   overflow: hidden;
-  transition: all var(--duration-normal) var(--ease-out);
   cursor: pointer;
 }
 
+/* Spotlight glow border */
 .ecosystem-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--card-accent-color);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.2),
+    transparent 40%
+  );
+  z-index: 1;
   opacity: 0;
-  transition: opacity var(--duration-normal) var(--ease-out);
-}
-
-.ecosystem-card:hover {
-  background: var(--color-bg-glass-hover);
-  border-color: var(--color-border-hover);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  transition: opacity 0.3s ease;
 }
 
 .ecosystem-card:hover::before {
   opacity: 1;
+}
+
+/* The actual card background */
+.ecosystem-card-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-4);
+  background: rgba(10, 10, 15, 0.85);
+  border-radius: calc(var(--radius-lg) - 1px);
+  padding: var(--space-6);
+  height: 100%;
+  z-index: 2;
+  backdrop-filter: blur(20px);
+}
+
+/* Inner glow background */
+.ecosystem-card-inner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.03),
+    transparent 40%
+  );
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+}
+
+.ecosystem-card:hover .ecosystem-card-inner::before {
+  opacity: 1;
+}
+
+.ecosystem-card:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Card sizes */

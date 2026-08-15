@@ -128,7 +128,7 @@ export default function AdminSidebar({ collapsed, mobileOpen, onToggle, onMobile
         {/* Bottom section */}
         <div className="admin-sidebar-bottom">
           <Link
-            to={`/${adminPath}/settings`}
+            to={`/${adminPath}/flow/settings`}
             className="admin-sidebar-link"
             title={collapsed ? 'Settings' : undefined}
           >

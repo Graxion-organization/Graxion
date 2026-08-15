@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Terminal, Database, Webhook, ArrowRight } from "lucide-react";
 import Button from "../../components/Button/Button";
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
@@ -7,16 +8,24 @@ import "./Developers.css";
 
 export default function Developers() {
   const [ref, isVisible] = useScrollAnimation({ threshold: 0.1 });
+  const sectionRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
   return (
-    <section className="developers section" id="developers">
+    <section className="developers section" id="developers" ref={sectionRef}>
       <div className="container">
         <div className="developers-grid" ref={ref}>
           {/* Text Content */}
           <motion.div
             className="developers-content"
             initial={{ opacity: 0, x: -30 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
+            animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
             <SectionHeader
@@ -55,79 +64,106 @@ export default function Developers() {
             </div>
           </motion.div>
 
-          {/* Terminal Mockup */}
+          {/* Terminal Mockup with Parallax */}
           <motion.div
-            className="developers-terminal"
+            className="developers-visual"
             initial={{ opacity: 0, x: 30 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
+            animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            style={{ y: parallaxY }}
           >
-            <div className="terminal-header">
-              <div className="terminal-dot red" />
-              <div className="terminal-dot yellow" />
-              <div className="terminal-dot green" />
-              <div className="terminal-title">train_model.js</div>
+            <div className="developers-terminal">
+              <div className="terminal-header">
+                <div className="terminal-dot red" />
+                <div className="terminal-dot yellow" />
+                <div className="terminal-dot green" />
+                <div className="terminal-title">train_model.js</div>
+              </div>
+              <div className="terminal-body">
+                <div className="terminal-line">
+                  <span className="terminal-line-num">1</span>
+                  <span><span className="token-keyword">import</span> {'{'} GraxionAI {'}'} <span className="token-keyword">from</span> <span className="token-string">'@graxion/sdk'</span>;</span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-line-num">2</span>
+                  <span></span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-line-num">3</span>
+                  <span><span className="token-comment">// Initialize the unified client</span></span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-line-num">4</span>
+                  <span><span className="token-keyword">const</span> ai = <span className="token-keyword">new</span> <span className="token-function">GraxionAI</span>(process.env.GRAXION_KEY);</span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-line-num">5</span>
+                  <span></span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-line-num">6</span>
+                  <span><span className="token-keyword">async function</span> <span className="token-function">deployModel</span>() {'{'}</span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-line-num">7</span>
+                  <span>&nbsp;&nbsp;<span className="token-keyword">const</span> model = <span className="token-keyword">await</span> ai.models.<span className="token-function">fineTune</span>({'{'}</span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-line-num">8</span>
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;<span className="token-property">datasetId</span>: <span className="token-string">'ds_789xyz'</span>,</span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-line-num">9</span>
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;<span className="token-property">baseModel</span>: <span className="token-string">'graxion-omni-v2'</span>,</span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-line-num">10</span>
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;<span className="token-property">epochs</span>: <span className="token-string">10</span></span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-line-num">11</span>
+                  <span>&nbsp;&nbsp;{'}'});</span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-line-num">12</span>
+                  <span></span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-line-num">13</span>
+                  <span>&nbsp;&nbsp;<span className="token-keyword">await</span> model.<span className="token-function">deploy</span>();</span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-line-num">14</span>
+                  <span>&nbsp;&nbsp;console.<span className="token-function">log</span>(<span className="token-string">`Model live at: ${'{'}model.endpoint{'}'}`</span>);</span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-line-num">15</span>
+                  <span>{'}'}</span>
+                </div>
+              </div>
             </div>
-            <div className="terminal-body">
-              <div className="terminal-line">
-                <span className="terminal-line-num">1</span>
-                <span><span className="token-keyword">import</span> {'{'} GraxionAI {'}'} <span className="token-keyword">from</span> <span className="token-string">'@graxion/sdk'</span>;</span>
-              </div>
-              <div className="terminal-line">
-                <span className="terminal-line-num">2</span>
-                <span></span>
-              </div>
-              <div className="terminal-line">
-                <span className="terminal-line-num">3</span>
-                <span><span className="token-comment">// Initialize the unified client</span></span>
-              </div>
-              <div className="terminal-line">
-                <span className="terminal-line-num">4</span>
-                <span><span className="token-keyword">const</span> ai = <span className="token-keyword">new</span> <span className="token-function">GraxionAI</span>(process.env.GRAXION_KEY);</span>
-              </div>
-              <div className="terminal-line">
-                <span className="terminal-line-num">5</span>
-                <span></span>
-              </div>
-              <div className="terminal-line">
-                <span className="terminal-line-num">6</span>
-                <span><span className="token-keyword">async function</span> <span className="token-function">deployModel</span>() {'{'}</span>
-              </div>
-              <div className="terminal-line">
-                <span className="terminal-line-num">7</span>
-                <span>&nbsp;&nbsp;<span className="token-keyword">const</span> model = <span className="token-keyword">await</span> ai.models.<span className="token-function">fineTune</span>({'{'}</span>
-              </div>
-              <div className="terminal-line">
-                <span className="terminal-line-num">8</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;<span className="token-property">datasetId</span>: <span className="token-string">'ds_789xyz'</span>,</span>
-              </div>
-              <div className="terminal-line">
-                <span className="terminal-line-num">9</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;<span className="token-property">baseModel</span>: <span className="token-string">'graxion-omni-v2'</span>,</span>
-              </div>
-              <div className="terminal-line">
-                <span className="terminal-line-num">10</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;<span className="token-property">epochs</span>: <span className="token-string">10</span></span>
-              </div>
-              <div className="terminal-line">
-                <span className="terminal-line-num">11</span>
-                <span>&nbsp;&nbsp;{'}'});</span>
-              </div>
-              <div className="terminal-line">
-                <span className="terminal-line-num">12</span>
-                <span></span>
-              </div>
-              <div className="terminal-line">
-                <span className="terminal-line-num">13</span>
-                <span>&nbsp;&nbsp;<span className="token-keyword">await</span> model.<span className="token-function">deploy</span>();</span>
-              </div>
-              <div className="terminal-line">
-                <span className="terminal-line-num">14</span>
-                <span>&nbsp;&nbsp;console.<span className="token-function">log</span>(<span className="token-string">`Model live at: ${'{'}model.endpoint{'}'}`</span>);</span>
-              </div>
-              <div className="terminal-line">
-                <span className="terminal-line-num">15</span>
-                <span>{'}'}</span>
+
+            {/* Infinite Marquee */}
+            <div className="developers-marquee">
+              <div className="marquee-content">
+                <span>Node.js</span><span className="marquee-dot"/>
+                <span>Python</span><span className="marquee-dot"/>
+                <span>Go</span><span className="marquee-dot"/>
+                <span>Rust</span><span className="marquee-dot"/>
+                <span>GraphQL</span><span className="marquee-dot"/>
+                <span>REST API</span><span className="marquee-dot"/>
+                <span>Webhooks</span><span className="marquee-dot"/>
+                <span>React</span><span className="marquee-dot"/>
+                
+                {/* Duplicated for smooth infinite scroll */}
+                <span>Node.js</span><span className="marquee-dot"/>
+                <span>Python</span><span className="marquee-dot"/>
+                <span>Go</span><span className="marquee-dot"/>
+                <span>Rust</span><span className="marquee-dot"/>
+                <span>GraphQL</span><span className="marquee-dot"/>
+                <span>REST API</span><span className="marquee-dot"/>
+                <span>Webhooks</span><span className="marquee-dot"/>
+                <span>React</span><span className="marquee-dot"/>
               </div>
             </div>
           </motion.div>

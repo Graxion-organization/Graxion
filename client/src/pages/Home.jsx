@@ -1,17 +1,11 @@
 import { Helmet } from "react-helmet-async";
 import Hero from "../sections/Hero/Hero";
-import TrustedBy from "../sections/TrustedBy/TrustedBy";
+import MetricsBar from "../sections/MetricsBar/MetricsBar";
 import HomeFeatured from "../sections/HomeFeatured/HomeFeatured";
-import Philosophy from "../sections/Philosophy/Philosophy";
 import Ecosystem from "../sections/Ecosystem/Ecosystem";
-import Connection from "../sections/Connection/Connection";
-import Vision from "../sections/Vision/Vision";
-import Principles from "../sections/Principles/Principles";
-import Trust from "../sections/Trust/Trust";
+import WhyGraxion from "../sections/WhyGraxion/WhyGraxion";
 import Developers from "../sections/Developers/Developers";
-import Research from "../sections/Research/Research";
 import Roadmap from "../sections/Roadmap/Roadmap";
-import News from "../sections/News/News";
 import Contact from "../sections/Contact/Contact";
 
 export default function Home() {
@@ -28,43 +22,25 @@ export default function Home() {
       {/* 1. Hero */}
       <Hero />
       
-      {/* 2. Trusted By */}
-      <TrustedBy />
+      {/* 2. Metrics Bar */}
+      <MetricsBar />
       
       {/* 3. Featured Products */}
       <HomeFeatured />
       
-      {/* 4. Why Graxion Exists */}
-      <Philosophy />
-      
-      {/* 5. Technology Ecosystem */}
+      {/* 4. Technology Ecosystem */}
       <Ecosystem />
       
-      {/* 6. How Everything Connects */}
-      <Connection />
+      {/* 5. Why Graxion */}
+      <WhyGraxion />
       
-      {/* 7. Vision */}
-      <Vision />
-      
-      {/* 8. Core Principles */}
-      <Principles />
-      
-      {/* 9. Security */}
-      <Trust />
-      
-      {/* 10. Developer Platform */}
+      {/* 6. Developer Platform */}
       <Developers />
       
-      {/* 11. Research */}
-      <Research />
-      
-      {/* 12. Roadmap */}
+      {/* 7. Roadmap */}
       <Roadmap />
       
-      {/* 13. Latest News */}
-      <News />
-      
-      {/* 14. Contact */}
+      {/* 8. Contact */}
       <Contact />
     </>
   );

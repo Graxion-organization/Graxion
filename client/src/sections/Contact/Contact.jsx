@@ -33,7 +33,7 @@ export default function Contact() {
           <motion.div
             className="contact-info"
             initial={{ opacity: 0, x: -30 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
+            animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
             <div>
@@ -90,17 +90,19 @@ export default function Contact() {
           {/* Right: Form */}
           <motion.div
             className="contact-form-wrapper"
-            initial={{ opacity: 0, x: 30 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{
-              duration: 0.7,
-              delay: 0.15,
-              ease: [0.16, 1, 0.3, 1],
+            initial="hidden"
+            animate={isVisible ? "visible" : "hidden"}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+              }
             }}
           >
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="contact-form-row">
-                <div className="contact-form-group">
+                <motion.div className="contact-form-group" variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <label className="contact-form-label" htmlFor="contact-name">
                     Name
                   </label>
@@ -114,8 +116,8 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                   />
-                </div>
-                <div className="contact-form-group">
+                </motion.div>
+                <motion.div className="contact-form-group" variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <label className="contact-form-label" htmlFor="contact-email">
                     Email
                   </label>
@@ -129,10 +131,10 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                   />
-                </div>
+                </motion.div>
               </div>
 
-              <div className="contact-form-group">
+              <motion.div className="contact-form-group" variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                 <label className="contact-form-label" htmlFor="contact-subject">
                   Subject
                 </label>
@@ -149,9 +151,9 @@ export default function Contact() {
                   <option value="press">Press & Media</option>
                   <option value="support">Support</option>
                 </select>
-              </div>
+              </motion.div>
 
-              <div className="contact-form-group">
+              <motion.div className="contact-form-group" variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                 <label className="contact-form-label" htmlFor="contact-message">
                   Message
                 </label>
@@ -164,9 +166,9 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                 />
-              </div>
+              </motion.div>
 
-              <div className="contact-form-submit">
+              <motion.div className="contact-form-submit" variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                 <Button
                   type="submit"
                   variant="primary"
@@ -176,7 +178,7 @@ export default function Contact() {
                 >
                   Send Message
                 </Button>
-              </div>
+              </motion.div>
             </form>
           </motion.div>
         </div>

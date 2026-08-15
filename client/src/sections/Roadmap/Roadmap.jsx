@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import { useScrollAnimation } from "../../hooks/useScrollAnimation";
 import "./Roadmap.css";
@@ -32,6 +33,14 @@ const roadmapItems = [
 
 export default function Roadmap() {
   const [ref, isVisible] = useScrollAnimation({ threshold: 0.1 });
+  const timelineRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start center", "end center"]
+  });
+
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
     <section className="roadmap section" id="roadmap">
@@ -42,27 +51,50 @@ export default function Roadmap() {
           subtitle="Our master plan to build the world's most trusted technology ecosystem, step by step."
         />
 
-        <div className="roadmap-timeline" ref={ref}>
-          {roadmapItems.map((item, index) => (
-            <motion.div
-              key={item.title}
-              className={`roadmap-item ${item.status}`}
-              initial={{ opacity: 0, x: -30 }}
-              animate={isVisible ? { opacity: 1, x: 0 } : {}}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.15,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
-              <div className="roadmap-marker" />
-              <div className="roadmap-date">{item.phase}</div>
-              <div className="roadmap-content">
-                <h4 className="roadmap-title">{item.title}</h4>
-                <p className="roadmap-desc">{item.description}</p>
-              </div>
-            </motion.div>
-          ))}
+        <div className="roadmap-timeline" ref={timelineRef}>
+          {/* Animated Progress Line */}
+          <motion.div 
+            className="roadmap-progress-line"
+            style={{ height: lineHeight }}
+          />
+
+          <div ref={ref}>
+            {roadmapItems.map((item, index) => {
+              // Calculate when this specific item should light up based on its index
+              const itemProgress = index / (roadmapItems.length - 1);
+              // Use framer motion to light up the marker when the scroll passes it
+              const markerScale = useTransform(scrollYProgress, [itemProgress - 0.1, itemProgress], [1, 1.3]);
+              const markerColor = useTransform(
+                scrollYProgress, 
+                [itemProgress - 0.1, itemProgress], 
+                ["var(--color-bg-secondary)", "var(--color-accent-cyan)"]
+              );
+
+              return (
+                <motion.div
+                  key={item.title}
+                  className={`roadmap-item ${item.status}`}
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.15,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                >
+                  <motion.div 
+                    className="roadmap-marker" 
+                    style={{ scale: markerScale, backgroundColor: markerColor }}
+                  />
+                  <div className="roadmap-date">{item.phase}</div>
+                  <div className="roadmap-content">
+                    <h4 className="roadmap-title">{item.title}</h4>
+                    <p className="roadmap-desc">{item.description}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
