@@ -44,20 +44,20 @@ export default function HomeFeatured() {
         >
           {/* Content */}
           <div className="home-featured-content">
-            <span className="home-featured-label">Featured: Graxion AI</span>
+            <span className="home-featured-label">Featured: Graxion Flow</span>
             <h3 className="home-featured-title">
-              Intelligence that <span className="text-gradient">Amplifies</span>
+              Omnichannel Automation that <span className="text-gradient">Scales</span>
             </h3>
             <p className="home-featured-desc">
-              Our advanced AI platform isn't just about automation. It's about empowering your team to think faster, create better, and solve complex problems with unprecedented ease.
+              Deploy advanced AI agents across YouTube, WhatsApp, Instagram, and Telegram. Automate customer support, schedule YouTube Shorts, moderate comments, and close deals effortlessly.
             </p>
 
             <div className="home-featured-list">
               {[
-                "Natural Language Processing & Generation",
-                "Automated Workflow Integration",
-                "Secure Enterprise Data Handling",
-                "Custom Model Fine-tuning",
+                "YouTube Comment Automation & Moderation",
+                "WhatsApp & Instagram DM Copilots",
+                "Drag-and-Drop Visual Flow Builder",
+                "Secure Enterprise API Integrations",
               ].map((item, i) => (
                 <motion.div
                   key={i}
@@ -73,8 +73,8 @@ export default function HomeFeatured() {
             </div>
 
             <div className="home-featured-cta">
-              <Button variant="primary" size="md" icon={<ArrowRight size={16} />}>
-                Try Graxion AI
+              <Button variant="primary" size="md" icon={<ArrowRight size={16} />} href="https://flow.graxion.in">
+                Try Graxion Flow
               </Button>
               <Button variant="ghost" size="md" href="/products">
                 View All Products
