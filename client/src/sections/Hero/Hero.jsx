@@ -101,7 +101,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
           <Sparkles size={14} className="hero-badge-icon" />
-          <span>Introducing Graxion Flow</span>
+          <span>Introducing Graxion 2.0</span>
         </motion.div>
 
         <h1 className="hero-title" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -122,7 +122,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0, rotateX: 0 }}
               transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
             >
-              This is <span className="hero-title-accent">Graxion Flow.</span>
+              This is <span className="hero-title-accent">Graxion.</span>
             </motion.span>
           </motion.span>
         </h1>
@@ -133,7 +133,7 @@ export default function Hero() {
           animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          Automate your YouTube channel, manage social media comments, schedule Shorts, and scale your workflows seamlessly with AI.
+          Scale your business with secure, high-performance infrastructure designed for modern workflows and rapid deployment.
         </motion.p>
 
         <div className="hero-cta-group">
