@@ -13,17 +13,40 @@ export default function CertificatePreview({ data, onClose }) {
   async function handleDownload() {
     if (!certRef.current) return;
     try {
+      // FIX for text squishing: Temporarily remove scaling from the ResponsiveDocumentViewer
+      // html2canvas miscalculates font tracking/widths when the parent has a CSS transform scale applied.
+      const scaledContainer = certRef.current.closest('.rdv-scaled-inner');
+      let originalTransform = '';
+      if (scaledContainer) {
+        originalTransform = scaledContainer.style.transform;
+        scaledContainer.style.transform = 'none';
+      }
+
+      // Small delay to allow the browser to recalculate unscaled layout
+      await new Promise(resolve => setTimeout(resolve, 50));
+
       const canvas = await html2canvas(certRef.current, {
-        scale: 3.125, // 300 DPI Export Scale (300 / 96)
+        scale: 3, // 300 DPI Export Scale
         backgroundColor: '#ffffff',
         useCORS: true,
       });
+
+      // Restore transform immediately after capture
+      if (scaledContainer) {
+        scaledContainer.style.transform = originalTransform;
+      }
+
       const link = document.createElement('a');
       link.download = `Graxion-Certificate-${data.certificateId}.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
     } catch (error) {
       console.error('Download failed:', error);
+      // Ensure we restore transform even on error
+      const scaledContainer = certRef.current?.closest('.rdv-scaled-inner');
+      if (scaledContainer && scaledContainer.style.transform === 'none') {
+        scaledContainer.style.transform = '';
+      }
     }
   }
 
@@ -46,8 +69,30 @@ export default function CertificatePreview({ data, onClose }) {
         <head>
           <title>Print Certificate - Graxion</title>
           ${styleHtml}
+          <style>
+            @page {
+              size: landscape;
+              margin: 0mm;
+            }
+            body {
+              margin: 0;
+              padding: 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 100vw;
+              height: 100vh;
+              background: #ffffff;
+              overflow: hidden;
+            }
+            .cert-container {
+              box-shadow: none !important;
+              transform: scale(0.95);
+              transform-origin: center;
+            }
+          </style>
         </head>
-        <body style="background: #ffffff; display: flex; justify-content: center; padding: 20px; margin: 0;">
+        <body>
           ${certHtml}
         </body>
       </html>
