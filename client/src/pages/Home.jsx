@@ -7,6 +7,7 @@ import WhyGraxion from "../sections/WhyGraxion/WhyGraxion";
 import Developers from "../sections/Developers/Developers";
 import Roadmap from "../sections/Roadmap/Roadmap";
 import Contact from "../sections/Contact/Contact";
+import WhatIsGraxion from "../sections/WhatIsGraxion/WhatIsGraxion";
 
 export default function Home() {
   return (
@@ -21,6 +22,9 @@ export default function Home() {
       
       {/* 1. Hero */}
       <Hero />
+      
+      {/* 1.5 What is Graxion */}
+      <WhatIsGraxion />
       
       {/* 2. Metrics Bar */}
       <MetricsBar />
