@@ -123,13 +123,10 @@
   justify-content: space-between; /* Stretches elements beautifully within 500px only */
 }
 
-/* Logo - Row align */
+/* Logo - Inline block align for html2canvas stability */
 .cert-logo {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
+  display: block;
+  text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
   position: relative;
@@ -137,18 +134,23 @@
 }
 
 .cert-logo-img {
-  display: block;
+  display: inline-block;
+  vertical-align: middle;
   height: 48px;
+  width: 48px;
   object-fit: contain;
+  margin-right: 12px;
 }
 
 .cert-logo-text-wrapper {
+  display: inline-block;
+  vertical-align: middle;
   font-family: 'Orbitron', sans-serif;
   font-size: 26px;
   font-weight: 800;
   letter-spacing: 4px;
   color: #0a0e1a;
-  text-align: center;
+  line-height: 48px;
 }
 
 .cert-text-orange {
