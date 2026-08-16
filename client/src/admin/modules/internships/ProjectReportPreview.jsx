@@ -3,6 +3,7 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { Download, Printer, X } from 'lucide-react';
 import ResponsiveDocumentViewer from './ResponsiveDocumentViewer';
+import CertificateContent from './CertificateContent';
 import './ProjectReportPreview.css';
 
 export default function ProjectReportPreview({ data, onClose }) {
@@ -232,25 +233,21 @@ export default function ProjectReportPreview({ data, onClose }) {
   };
 };
 
-const parseLines = (customText, defaultArray) => {
+const parseLines = (customText) => {
   if (customText && customText.trim() !== '') {
     return customText.split('\n').filter(line => line.trim() !== '');
   }
-  return defaultArray;
+  return [];
 };
 
 const dbReport = data.projectReport || {};
-const defaultContent = getDomainSpecificContent(data.domain || 'Backend Development');
 
 const content = {
-  certificateText: (dbReport.certificateText && dbReport.certificateText.trim() !== '') 
-    ? dbReport.certificateText 
-    : `This is to certify that ${data.studentName} has successfully completed an internship program in ${data.domain || 'Backend Development'} at Graxion. The intern has demonstrated excellent technical skills and professional conduct during the internship period from ${startDate} to ${endDate}.`,
-  intro: parseLines(dbReport.intro, defaultContent.intro),
-  objectives: parseLines(dbReport.objectives, defaultContent.objectives),
-  methodology: parseLines(dbReport.methodology, defaultContent.methodology),
-  outcomes: parseLines(dbReport.outcomes, defaultContent.outcomes),
-  references: parseLines(dbReport.references, defaultContent.references),
+  intro: parseLines(dbReport.intro),
+  objectives: parseLines(dbReport.objectives),
+  methodology: parseLines(dbReport.methodology),
+  outcomes: parseLines(dbReport.outcomes),
+  references: parseLines(dbReport.references),
 };
   const studentIdStr = data.studentId || 'GRX-STD-XXXXXX';
   const certIdStr = data.certificateId || 'GRX-INT-XXXXXX';
@@ -317,23 +314,9 @@ const content = {
         </div>
 
         {/* ================= PAGE 2: CERTIFICATE ================= */}
-        <div className="pr-page page-break">
-          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-            <img src="/logo.png" alt="Graxion Logo" style={{ width: '200px' }} />
-          </div>
-          <h2 className="pr-section-title" style={{ textAlign: 'center' }}>CERTIFICATE</h2>
-          <p className="pr-text" style={{ marginTop: '40px', lineHeight: '2' }}>
-            {content.certificateText}
-          </p>
-          <div className="pr-signature-grid" style={{ marginTop: '100px' }}>
-            <div>
-              <p>Date: {issueDate}</p>
-            </div>
-            <div style={{ textAlign: 'right' }}>
-              <p>___________________</p>
-              <p><strong>Authorized Signatory</strong></p>
-              <p>Graxion</p>
-            </div>
+        <div className="pr-page page-break" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+          <div style={{ transform: 'scale(0.707)', transformOrigin: 'center center', width: '1123px', height: '794px' }}>
+            <CertificateContent data={data} />
           </div>
         </div>
 

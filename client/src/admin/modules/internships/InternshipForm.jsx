@@ -655,16 +655,6 @@ export default function InternshipForm() {
             
             <div className="if-grid full">
               <FormField
-                label="Certificate Text"
-                name="projectReport.certificateText"
-                type="textarea"
-                value={formData.projectReport?.certificateText || ''}
-                onChange={handleChange}
-                placeholder="Enter certificate text here..."
-                icon={FileCode}
-                rows={4}
-              />
-              <FormField
                 label="Introduction (Separate paragraphs with new lines)"
                 name="projectReport.intro"
                 type="textarea"
