@@ -1,8 +1,6 @@
 import { useRef } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
-import { Download, Printer, X, FileText } from 'lucide-react';
+import { Printer, X } from 'lucide-react';
 import ResponsiveDocumentViewer from './ResponsiveDocumentViewer';
 import './CertificatePreview.css';
 
@@ -11,99 +9,7 @@ export default function CertificatePreview({ data, onClose }) {
 
   const verifyUrl = `https://graxion.in/internship/verify/${data.certificateId}`;
 
-  async function waitForImages(container) {
-    const images = Array.from(container.querySelectorAll('img'));
-    await Promise.all(
-      images.map((img) => {
-        if (img.complete && img.naturalWidth > 0) {
-          return Promise.resolve();
-        }
-        return new Promise((resolve) => {
-          img.onload = resolve;
-          img.onerror = resolve;
-        });
-      })
-    );
-  }
 
-  async function handleDownload() {
-    if (!certRef.current) return;
-    try {
-      await waitForImages(certRef.current);
-      const canvas = await html2canvas(certRef.current, {
-        scale: 3, 
-        backgroundColor: '#ffffff',
-        useCORS: true,
-        allowTaint: false,
-        imageTimeout: 15000,
-        logging: false,
-        windowWidth: 1400,
-        windowHeight: 1000,
-        onclone: (clonedDoc) => {
-          const scaledInner = clonedDoc.querySelector('.rdv-scaled-inner');
-          if (scaledInner) {
-            scaledInner.style.transform = 'none';
-          }
-          const viewerContainer = clonedDoc.querySelector('.rdv-viewer-container');
-          if (viewerContainer) {
-            viewerContainer.style.alignItems = 'flex-start';
-            viewerContainer.style.justifyContent = 'flex-start';
-          }
-        }
-      });
-
-      const link = document.createElement('a');
-      link.download = `Graxion-Certificate-${data.certificateId}.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    } catch (error) {
-      console.error('Download failed:', error);
-    }
-  }
-
-  async function handleDownloadPDF() {
-    if (!certRef.current) return;
-    try {
-      await waitForImages(certRef.current);
-      const canvas = await html2canvas(certRef.current, {
-        scale: 3, 
-        backgroundColor: '#ffffff',
-        useCORS: true,
-        allowTaint: false,
-        imageTimeout: 15000,
-        logging: false,
-        windowWidth: 1400,
-        windowHeight: 1000,
-        onclone: (clonedDoc) => {
-          const scaledInner = clonedDoc.querySelector('.rdv-scaled-inner');
-          if (scaledInner) {
-            scaledInner.style.transform = 'none';
-          }
-          const viewerContainer = clonedDoc.querySelector('.rdv-viewer-container');
-          if (viewerContainer) {
-            viewerContainer.style.alignItems = 'flex-start';
-            viewerContainer.style.justifyContent = 'flex-start';
-          }
-        }
-      });
-
-      const imgData = canvas.toDataURL('image/jpeg', 1.0);
-      const pdfWidth = 297;
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-      
-      const pdf = new jsPDF({
-        orientation: 'landscape',
-        unit: 'mm',
-        format: 'a4'
-      });
-      const yOffset = (210 - pdfHeight) / 2;
-      pdf.addImage(imgData, 'JPEG', 0, yOffset > 0 ? yOffset : 0, pdfWidth, pdfHeight);
-      pdf.save(`Graxion-Certificate-${data.certificateId}.pdf`);
-      
-    } catch (error) {
-      console.error('PDF Download failed:', error);
-    }
-  }
 
   function handlePrint() {
     const iframe = document.createElement('iframe');
@@ -187,14 +93,7 @@ export default function CertificatePreview({ data, onClose }) {
       documentHeight={794}
       actions={
         <>
-          <button className="admin-btn-secondary verify-btn-doc" onClick={handleDownload}>
-            <Download size={16} />
-            Download PNG
-          </button>
-          <button className="admin-btn-secondary verify-btn-doc" onClick={handleDownloadPDF}>
-            <FileText size={16} />
-            Download PDF
-          </button>
+
           <button className="admin-btn-secondary verify-btn-doc" onClick={handlePrint}>
             <Printer size={16} />
             Print
