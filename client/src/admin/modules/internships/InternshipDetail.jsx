@@ -281,6 +281,7 @@ export default function InternshipDetail() {
         onClose={() => setShowCertificate(false)}
         title="Certificate Preview"
         size="xl"
+        noPadding
       >
         <CertificatePreview data={data} />
       </Modal>
@@ -291,6 +292,7 @@ export default function InternshipDetail() {
         onClose={() => setShowReportCard(false)}
         title="Report Card Preview"
         size="xl"
+        noPadding
       >
         <ReportCardPreview data={data} />
       </Modal>

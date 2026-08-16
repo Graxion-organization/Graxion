@@ -2,7 +2,7 @@ import './Modal.css';
 import { X } from 'lucide-react';
 import { useEffect } from 'react';
 
-export default function Modal({ isOpen, onClose, title, children, size = 'md', footer }) {
+export default function Modal({ isOpen, onClose, title, children, size = 'md', footer, noPadding = false }) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -26,7 +26,7 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md', f
             <X size={18} />
           </button>
         </div>
-        <div className="admin-modal-body">{children}</div>
+        <div className={`admin-modal-body ${noPadding ? 'no-padding' : ''}`}>{children}</div>
         {footer && <div className="admin-modal-footer">{footer}</div>}
       </div>
     </div>
