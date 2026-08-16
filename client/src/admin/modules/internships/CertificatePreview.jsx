@@ -201,7 +201,9 @@ export default function CertificatePreview({ data, onClose }) {
         <div className="cert-content">
           {/* Logo */}
           <div className="cert-logo">
-            <img src="/logo.png" alt="Graxion Logo" className="cert-logo-img" onError={(e) => { e.target.style.display='none' }} />
+            <div className="cert-logo-img-wrapper">
+              <img src="/logo.png" alt="Graxion Logo" className="cert-logo-img" onError={(e) => { e.target.style.display='none' }} />
+            </div>
             <div className="cert-logo-text-wrapper">
               GRA<span className="cert-text-orange">X</span>ION
             </div>
