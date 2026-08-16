@@ -194,3 +194,16 @@
     justify-content: flex-end;
   }
 }
+
+@media (max-width: 480px) {
+  .id-header-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .id-header-actions .admin-btn-primary,
+  .id-header-actions .admin-btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+}

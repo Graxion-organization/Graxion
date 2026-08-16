@@ -196,3 +196,27 @@
   border-color: rgba(244, 63, 94, 0.2);
   background: rgba(244, 63, 94, 0.06);
 }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .il-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .il-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .il-filter-group,
+  .il-filter-group select {
+    width: 100%;
+  }
+
+  .il-bulk-actions {
+    margin-left: 0;
+    justify-content: space-between;
+    width: 100%;
+  }
+}

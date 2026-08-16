@@ -298,6 +298,15 @@
 
 /* ── Responsive ── */
 @media (max-width: 640px) {
+  .if-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .if-back-btn {
+    margin-bottom: 12px;
+  }
+
   .if-form-grid {
     grid-template-columns: 1fr;
   }
@@ -317,6 +326,25 @@
   
   .mod-input-lg, .mod-input-sm {
     width: 100%;
+  }
+
+  .if-form-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .if-form-actions-right {
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .if-form-actions button {
+    width: 100%;
+    justify-content: center;
   }
 }
 
