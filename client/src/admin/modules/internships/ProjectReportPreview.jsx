@@ -316,51 +316,12 @@ export default function ProjectReportPreview({ data, onClose }) {
           </div>
         </div>
 
-        {/* ================= PAGE 2: CERTIFICATE & ACK ================= */}
+        {/* ================= PAGE 2: CERTIFICATE ================= */}
         <div className="pr-page page-break">
-          <h2 className="pr-section-title">2. Certificate & Acknowledgement</h2>
-          <h3 className="pr-subsection-title">Acknowledgement</h3>
-          <p className="pr-text">
-            I would like to express my sincere gratitude to Graxion for providing me with the opportunity to successfully complete my internship in {data.domain || 'Backend Development'} using {content.techStack}. This internship provided me with practical exposure to modern technologies and helped me strengthen my programming, database management, and development skills.
+          <h2 className="pr-section-title">2. Certificate</h2>
+          <p className="pr-text" style={{ marginTop: '40px', fontStyle: 'italic', color: '#666' }}>
+            [Attach or print the official Graxion Internship Certificate here]
           </p>
-          <p className="pr-text">
-            I am deeply thankful to my internship mentor, <strong>{data.mentor || 'the entire Graxion team'}</strong>, for their continuous guidance, technical support, valuable suggestions, and encouragement throughout the internship period. Their professional approach and real-world development practices significantly enhanced my learning experience.
-          </p>
-          <p className="pr-text">
-            I would also like to express my gratitude to the faculty members of {data.institution || 'my college/institution'} for their motivation and academic guidance.
-          </p>
-          <p className="pr-text">
-            Finally, I sincerely thank my parents, friends, and everyone who supported and encouraged me throughout this internship. The knowledge and practical experience gained during this training will greatly contribute to my future career in software development.
-          </p>
-          <div className="pr-signature-block">
-            <p><strong>Submitted By:</strong></p>
-            <p>{data.studentName}</p>
-          </div>
-        </div>
-
-        {/* ================= PAGE 3: DECLARATION ================= */}
-        <div className="pr-page page-break">
-          <h3 className="pr-subsection-title">Declaration</h3>
-          <p className="pr-text">
-            I hereby declare that this internship report titled "{data.domain || 'Backend Development'} using {content.techStack}" is based on the internship completed by me at Graxion.
-          </p>
-          <p className="pr-text">
-            This report is my original work and has been prepared based on the knowledge, practical assignments, and projects completed during the internship under the guidance of the organization.
-          </p>
-          <p className="pr-text">
-            I further declare that this report has not been submitted, either wholly or partially, to any other university or institution for the award of any degree, diploma, or certificate.
-          </p>
-          
-          <div className="pr-signature-grid">
-            <div>
-              <p>Date: ______________</p>
-              <p>Place: ______________</p>
-            </div>
-            <div style={{ textAlign: 'right' }}>
-              <p>Signature: ___________________</p>
-              <p>Name: <strong>{data.studentName}</strong></p>
-            </div>
-          </div>
         </div>
 
         {/* ================= PAGE 4: INTRODUCTION ================= */}
@@ -391,8 +352,8 @@ export default function ProjectReportPreview({ data, onClose }) {
           </ul>
         </div>
 
-        {/* ================= PAGE 7: OUTCOMES & REFS ================= */}
-        <div className="pr-page">
+        {/* ================= PAGE 6: OUTCOMES ================= */}
+        <div className="pr-page page-break">
           <h2 className="pr-section-title">6. Outcomes</h2>
           <ul className="pr-list">
             {content.outcomes.map((outcome, idx) => (
@@ -402,8 +363,11 @@ export default function ProjectReportPreview({ data, onClose }) {
           
           <h3 className="pr-subsection-title">Overall Outcomes</h3>
           <p className="pr-text">{content.overallOutcomes}</p>
+        </div>
 
-          <h2 className="pr-section-title" style={{ marginTop: '40px' }}>7. References</h2>
+        {/* ================= PAGE 7: REFERENCES ================= */}
+        <div className="pr-page">
+          <h2 className="pr-section-title">7. References</h2>
           <p className="pr-text">The following resources were referred to during the internship and while preparing this report:</p>
           <ul className="pr-list">
             {content.references.map((ref, idx) => (
