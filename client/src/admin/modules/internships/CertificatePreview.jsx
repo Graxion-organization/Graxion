@@ -14,36 +14,24 @@ export default function CertificatePreview({ data, onClose }) {
   async function handleDownload() {
     if (!certRef.current) return;
     try {
-      const scrollPos = window.scrollY;
-      window.scrollTo(0, 0);
-
-      const scaledContainer = certRef.current.closest('.rdv-scaled-inner');
-      let originalTransform = '';
-
-      if (scaledContainer) {
-        originalTransform = scaledContainer.style.transform;
-        scaledContainer.style.transform = 'none';
-      }
-
-      await new Promise(resolve => setTimeout(resolve, 50));
-
-      const rect = certRef.current.getBoundingClientRect();
       const canvas = await html2canvas(certRef.current, {
         scale: 3, 
         backgroundColor: '#ffffff',
         useCORS: true,
-        x: rect.left,
-        y: rect.top,
-        width: rect.width,
-        height: rect.height,
-        scrollX: 0,
-        scrollY: 0
+        windowWidth: 1400,
+        windowHeight: 1000,
+        onclone: (clonedDoc) => {
+          const scaledInner = clonedDoc.querySelector('.rdv-scaled-inner');
+          if (scaledInner) {
+            scaledInner.style.transform = 'none';
+          }
+          const viewerContainer = clonedDoc.querySelector('.rdv-viewer-container');
+          if (viewerContainer) {
+            viewerContainer.style.alignItems = 'flex-start';
+            viewerContainer.style.justifyContent = 'flex-start';
+          }
+        }
       });
-
-      if (scaledContainer) {
-        scaledContainer.style.transform = originalTransform;
-      }
-      window.scrollTo(0, scrollPos);
 
       const link = document.createElement('a');
       link.download = `Graxion-Certificate-${data.certificateId}.png`;
@@ -51,46 +39,30 @@ export default function CertificatePreview({ data, onClose }) {
       link.click();
     } catch (error) {
       console.error('Download failed:', error);
-      const scaledContainer = certRef.current?.closest('.rdv-scaled-inner');
-      if (scaledContainer && scaledContainer.style.transform === 'none') {
-        scaledContainer.style.transform = '';
-      }
     }
   }
 
   async function handleDownloadPDF() {
     if (!certRef.current) return;
     try {
-      const scrollPos = window.scrollY;
-      window.scrollTo(0, 0);
-
-      const scaledContainer = certRef.current.closest('.rdv-scaled-inner');
-      let originalTransform = '';
-
-      if (scaledContainer) {
-        originalTransform = scaledContainer.style.transform;
-        scaledContainer.style.transform = 'none';
-      }
-
-      await new Promise(resolve => setTimeout(resolve, 50));
-
-      const rect = certRef.current.getBoundingClientRect();
       const canvas = await html2canvas(certRef.current, {
         scale: 3, 
         backgroundColor: '#ffffff',
         useCORS: true,
-        x: rect.left,
-        y: rect.top,
-        width: rect.width,
-        height: rect.height,
-        scrollX: 0,
-        scrollY: 0
+        windowWidth: 1400,
+        windowHeight: 1000,
+        onclone: (clonedDoc) => {
+          const scaledInner = clonedDoc.querySelector('.rdv-scaled-inner');
+          if (scaledInner) {
+            scaledInner.style.transform = 'none';
+          }
+          const viewerContainer = clonedDoc.querySelector('.rdv-viewer-container');
+          if (viewerContainer) {
+            viewerContainer.style.alignItems = 'flex-start';
+            viewerContainer.style.justifyContent = 'flex-start';
+          }
+        }
       });
-
-      if (scaledContainer) {
-        scaledContainer.style.transform = originalTransform;
-      }
-      window.scrollTo(0, scrollPos);
 
       const imgData = canvas.toDataURL('image/jpeg', 1.0);
       const pdfWidth = 297;
@@ -101,17 +73,12 @@ export default function CertificatePreview({ data, onClose }) {
         unit: 'mm',
         format: 'a4'
       });
-      // Center vertically if there is a tiny aspect ratio mismatch
       const yOffset = (210 - pdfHeight) / 2;
       pdf.addImage(imgData, 'JPEG', 0, yOffset > 0 ? yOffset : 0, pdfWidth, pdfHeight);
       pdf.save(`Graxion-Certificate-${data.certificateId}.pdf`);
       
     } catch (error) {
       console.error('PDF Download failed:', error);
-      const scaledContainer = certRef.current?.closest('.rdv-scaled-inner');
-      if (scaledContainer && scaledContainer.style.transform === 'none') {
-        scaledContainer.style.transform = '';
-      }
     }
   }
 
