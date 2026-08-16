@@ -156,6 +156,17 @@ const internshipSchema = new mongoose.Schema({
     default: 'internship',
   },
 
+  // Project Report Content
+  projectReport: {
+    techStack: { type: String, trim: true },
+    intro: { type: String, trim: true },
+    objectives: { type: String, trim: true },
+    methodology: { type: String, trim: true },
+    outcomes: { type: String, trim: true },
+    overallOutcomes: { type: String, trim: true },
+    references: { type: String, trim: true },
+  },
+
   // Metadata
   addedBy: {
     type: mongoose.Schema.Types.ObjectId,

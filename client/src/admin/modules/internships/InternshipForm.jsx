@@ -21,7 +21,10 @@ import {
   Hash,
   GraduationCap,
   BookOpen,
-  Building2
+  Building2,
+  FileCode,
+  AlignLeft,
+  List
 } from 'lucide-react';
 import './InternshipForm.css';
 
@@ -86,7 +89,16 @@ export default function InternshipForm() {
     report: '',
     mentor: '',
     overallRemarks: '',
-    assessments: []
+    assessments: [],
+    projectReport: {
+      techStack: '',
+      intro: '',
+      objectives: '',
+      methodology: '',
+      outcomes: '',
+      overallOutcomes: '',
+      references: ''
+    }
   });
 
   useEffect(() => {
@@ -121,7 +133,10 @@ export default function InternshipForm() {
         report: d.report || '',
         mentor: d.mentor || '',
         overallRemarks: d.overallRemarks || '',
-        assessments: d.assessments || []
+        assessments: d.assessments || [],
+        projectReport: d.projectReport || {
+          techStack: '', intro: '', objectives: '', methodology: '', outcomes: '', overallOutcomes: '', references: ''
+        }
       });
     } catch (error) {
       console.error('Failed to fetch:', error);
@@ -132,8 +147,21 @@ export default function InternshipForm() {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
+    if (name.startsWith('projectReport.')) {
+      const key = name.split('.')[1];
+      setFormData(prev => ({
+        ...prev,
+        projectReport: {
+          ...prev.projectReport,
+          [key]: value
+        }
+      }));
+    } else {
+      setFormData({ ...formData, [name]: value });
+      if (errors[name]) {
+        setErrors({ ...errors, [name]: '' });
+      }
+    }
   }
 
   // ---- Assessments Logic ----
@@ -230,7 +258,7 @@ export default function InternshipForm() {
 
   function nextStep() {
     if (validateStep(step)) {
-      setStep((prev) => Math.min(prev + 1, 4));
+      setStep((prev) => Math.min(prev + 1, 5));
     }
   }
 
@@ -301,6 +329,7 @@ export default function InternshipForm() {
           { num: 2, label: 'Internship' },
           { num: 3, label: 'Performance' },
           { num: 4, label: 'Assessments' },
+          { num: 5, label: 'Report' },
         ].map((s) => (
           <button
             key={s.num}
@@ -616,7 +645,91 @@ export default function InternshipForm() {
           </div>
         )}
 
-        {/* Actions */}
+        {/* STEP 5: Project Report */}
+        {step === 5 && (
+          <div className="if-section">
+            <div className="if-section-header">
+              <h3><FileCode size={20} /> Project Report Content</h3>
+              <p>Customize the 7 pages of the Project Report. Leave empty to use the system defaults.</p>
+            </div>
+            
+            <div className="if-grid">
+              <FormField
+                label="Tech Stack (e.g. Node.js, Express.js & MongoDB)"
+                name="projectReport.techStack"
+                value={formData.projectReport?.techStack || ''}
+                onChange={handleChange}
+                placeholder="Overrides the default tech stack text"
+                icon={Hash}
+              />
+            </div>
+            
+            <div className="if-grid full">
+              <FormField
+                label="Introduction (Separate paragraphs with new lines)"
+                name="projectReport.intro"
+                type="textarea"
+                value={formData.projectReport?.intro || ''}
+                onChange={handleChange}
+                placeholder="Enter introduction text here..."
+                icon={AlignLeft}
+                rows={4}
+              />
+              <FormField
+                label="Objectives (Separate points with new lines)"
+                name="projectReport.objectives"
+                type="textarea"
+                value={formData.projectReport?.objectives || ''}
+                onChange={handleChange}
+                placeholder="Enter objectives here..."
+                icon={List}
+                rows={4}
+              />
+              <FormField
+                label="Methodology (Separate points with new lines)"
+                name="projectReport.methodology"
+                type="textarea"
+                value={formData.projectReport?.methodology || ''}
+                onChange={handleChange}
+                placeholder="Enter methodology here..."
+                icon={List}
+                rows={4}
+              />
+              <FormField
+                label="Outcomes (Separate points with new lines)"
+                name="projectReport.outcomes"
+                type="textarea"
+                value={formData.projectReport?.outcomes || ''}
+                onChange={handleChange}
+                placeholder="Enter outcomes here..."
+                icon={List}
+                rows={4}
+              />
+              <FormField
+                label="Overall Outcomes (Paragraph)"
+                name="projectReport.overallOutcomes"
+                type="textarea"
+                value={formData.projectReport?.overallOutcomes || ''}
+                onChange={handleChange}
+                placeholder="Enter overall outcomes here..."
+                icon={AlignLeft}
+                rows={4}
+              />
+              <FormField
+                label="References (Separate points with new lines)"
+                name="projectReport.references"
+                type="textarea"
+                value={formData.projectReport?.references || ''}
+                onChange={handleChange}
+                placeholder="Enter references here..."
+                icon={List}
+                rows={4}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Footer Actions */}
         <div className="if-form-actions">
           {step > 1 && (
             <button type="button" className="admin-btn-secondary" onClick={prevStep}>
@@ -625,7 +738,7 @@ export default function InternshipForm() {
             </button>
           )}
           <div className="if-form-actions-right">
-            {step < 4 ? (
+            {step < 5 ? (
               <button type="button" className="admin-btn-primary" onClick={nextStep}>
                 Next Step
               </button>

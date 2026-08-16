@@ -232,7 +232,25 @@ export default function ProjectReportPreview({ data, onClose }) {
     };
   };
 
-  const content = getDomainSpecificContent(data.domain || 'Backend Development');
+  const parseLines = (customText, defaultArray) => {
+    if (customText && customText.trim() !== '') {
+      return customText.split('\n').filter(line => line.trim() !== '');
+    }
+    return defaultArray;
+  };
+
+  const dbReport = data.projectReport || {};
+  const defaultContent = getDomainSpecificContent(data.domain || 'Backend Development');
+
+  const content = {
+    techStack: (dbReport.techStack && dbReport.techStack.trim() !== '') ? dbReport.techStack : defaultContent.techStack,
+    intro: parseLines(dbReport.intro, defaultContent.intro),
+    objectives: parseLines(dbReport.objectives, defaultContent.objectives),
+    methodology: parseLines(dbReport.methodology, defaultContent.methodology),
+    outcomes: parseLines(dbReport.outcomes, defaultContent.outcomes),
+    overallOutcomes: (dbReport.overallOutcomes && dbReport.overallOutcomes.trim() !== '') ? dbReport.overallOutcomes : defaultContent.overallOutcomes,
+    references: parseLines(dbReport.references, defaultContent.references),
+  };
   const studentIdStr = data.studentId || 'GRX-STD-XXXXXX';
   const certIdStr = data.certificateId || 'GRX-INT-XXXXXX';
 
