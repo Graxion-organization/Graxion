@@ -14,44 +14,36 @@ export default function CertificatePreview({ data, onClose }) {
   async function handleDownload() {
     if (!certRef.current) return;
     try {
+      const scrollPos = window.scrollY;
+      window.scrollTo(0, 0);
+
       const scaledContainer = certRef.current.closest('.rdv-scaled-inner');
       let originalTransform = '';
-      let originalPosition = '';
-      let originalTop = '';
-      let originalLeft = '';
-      let originalZIndex = '';
 
       if (scaledContainer) {
         originalTransform = scaledContainer.style.transform;
-        originalPosition = scaledContainer.style.position;
-        originalTop = scaledContainer.style.top;
-        originalLeft = scaledContainer.style.left;
-        originalZIndex = scaledContainer.style.zIndex;
-
         scaledContainer.style.transform = 'none';
-        scaledContainer.style.position = 'fixed';
-        scaledContainer.style.top = '0';
-        scaledContainer.style.left = '0';
-        scaledContainer.style.zIndex = '9999';
       }
 
       await new Promise(resolve => setTimeout(resolve, 50));
 
+      const rect = certRef.current.getBoundingClientRect();
       const canvas = await html2canvas(certRef.current, {
         scale: 3, 
         backgroundColor: '#ffffff',
         useCORS: true,
+        x: rect.left,
+        y: rect.top,
+        width: rect.width,
+        height: rect.height,
         scrollX: 0,
         scrollY: 0
       });
 
       if (scaledContainer) {
         scaledContainer.style.transform = originalTransform;
-        scaledContainer.style.position = originalPosition;
-        scaledContainer.style.top = originalTop;
-        scaledContainer.style.left = originalLeft;
-        scaledContainer.style.zIndex = originalZIndex;
       }
+      window.scrollTo(0, scrollPos);
 
       const link = document.createElement('a');
       link.download = `Graxion-Certificate-${data.certificateId}.png`;
@@ -62,7 +54,6 @@ export default function CertificatePreview({ data, onClose }) {
       const scaledContainer = certRef.current?.closest('.rdv-scaled-inner');
       if (scaledContainer && scaledContainer.style.transform === 'none') {
         scaledContainer.style.transform = '';
-        scaledContainer.style.position = '';
       }
     }
   }
@@ -70,53 +61,49 @@ export default function CertificatePreview({ data, onClose }) {
   async function handleDownloadPDF() {
     if (!certRef.current) return;
     try {
+      const scrollPos = window.scrollY;
+      window.scrollTo(0, 0);
+
       const scaledContainer = certRef.current.closest('.rdv-scaled-inner');
       let originalTransform = '';
-      let originalPosition = '';
-      let originalTop = '';
-      let originalLeft = '';
-      let originalZIndex = '';
 
       if (scaledContainer) {
         originalTransform = scaledContainer.style.transform;
-        originalPosition = scaledContainer.style.position;
-        originalTop = scaledContainer.style.top;
-        originalLeft = scaledContainer.style.left;
-        originalZIndex = scaledContainer.style.zIndex;
-
-        // Force to top-left of viewport to prevent scroll-cropping during capture
         scaledContainer.style.transform = 'none';
-        scaledContainer.style.position = 'fixed';
-        scaledContainer.style.top = '0';
-        scaledContainer.style.left = '0';
-        scaledContainer.style.zIndex = '9999';
       }
 
       await new Promise(resolve => setTimeout(resolve, 50));
 
+      const rect = certRef.current.getBoundingClientRect();
       const canvas = await html2canvas(certRef.current, {
         scale: 3, 
         backgroundColor: '#ffffff',
         useCORS: true,
+        x: rect.left,
+        y: rect.top,
+        width: rect.width,
+        height: rect.height,
         scrollX: 0,
         scrollY: 0
       });
 
       if (scaledContainer) {
         scaledContainer.style.transform = originalTransform;
-        scaledContainer.style.position = originalPosition;
-        scaledContainer.style.top = originalTop;
-        scaledContainer.style.left = originalLeft;
-        scaledContainer.style.zIndex = originalZIndex;
       }
+      window.scrollTo(0, scrollPos);
 
       const imgData = canvas.toDataURL('image/jpeg', 1.0);
+      const pdfWidth = 297;
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      
       const pdf = new jsPDF({
         orientation: 'landscape',
         unit: 'mm',
         format: 'a4'
       });
-      pdf.addImage(imgData, 'JPEG', 0, 0, 297, 210);
+      // Center vertically if there is a tiny aspect ratio mismatch
+      const yOffset = (210 - pdfHeight) / 2;
+      pdf.addImage(imgData, 'JPEG', 0, yOffset > 0 ? yOffset : 0, pdfWidth, pdfHeight);
       pdf.save(`Graxion-Certificate-${data.certificateId}.pdf`);
       
     } catch (error) {
@@ -124,7 +111,6 @@ export default function CertificatePreview({ data, onClose }) {
       const scaledContainer = certRef.current?.closest('.rdv-scaled-inner');
       if (scaledContainer && scaledContainer.style.transform === 'none') {
         scaledContainer.style.transform = '';
-        scaledContainer.style.position = '';
       }
     }
   }
