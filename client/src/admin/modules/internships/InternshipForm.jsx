@@ -15,7 +15,9 @@ import {
   Save,
   Loader,
   Plus,
-  Trash2
+  Trash2,
+  ChevronUp,
+  ChevronDown
 } from 'lucide-react';
 import './InternshipForm.css';
 
@@ -143,6 +145,24 @@ export default function InternshipForm() {
   function updateWeekName(weekIndex, name) {
     const newAssessments = [...formData.assessments];
     newAssessments[weekIndex].weekName = name;
+    setFormData({ ...formData, assessments: newAssessments });
+  }
+
+  function moveWeekUp(weekIndex) {
+    if (weekIndex === 0) return;
+    const newAssessments = [...formData.assessments];
+    const temp = newAssessments[weekIndex - 1];
+    newAssessments[weekIndex - 1] = newAssessments[weekIndex];
+    newAssessments[weekIndex] = temp;
+    setFormData({ ...formData, assessments: newAssessments });
+  }
+
+  function moveWeekDown(weekIndex) {
+    if (weekIndex === formData.assessments.length - 1) return;
+    const newAssessments = [...formData.assessments];
+    const temp = newAssessments[weekIndex + 1];
+    newAssessments[weekIndex + 1] = newAssessments[weekIndex];
+    newAssessments[weekIndex] = temp;
     setFormData({ ...formData, assessments: newAssessments });
   }
 
@@ -468,9 +488,29 @@ export default function InternshipForm() {
                         placeholder="Week Name (e.g. Week 1)"
                         className="week-name-input"
                       />
-                      <button type="button" className="icon-btn danger" onClick={() => removeWeek(wIndex)}>
-                        <Trash2 size={16} />
-                      </button>
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        <button 
+                          type="button" 
+                          className="icon-btn" 
+                          onClick={() => moveWeekUp(wIndex)}
+                          disabled={wIndex === 0}
+                          title="Move Week Up"
+                        >
+                          <ChevronUp size={16} />
+                        </button>
+                        <button 
+                          type="button" 
+                          className="icon-btn" 
+                          onClick={() => moveWeekDown(wIndex)}
+                          disabled={wIndex === formData.assessments.length - 1}
+                          title="Move Week Down"
+                        >
+                          <ChevronDown size={16} />
+                        </button>
+                        <button type="button" className="icon-btn danger" onClick={() => removeWeek(wIndex)} title="Delete Week">
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
                     </div>
 
                     <div className="modules-list">

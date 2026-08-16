@@ -272,6 +272,11 @@
   cursor: pointer;
 }
 
+.icon-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
 .icon-btn.danger:hover {
   color: var(--color-accent-rose);
   border-color: var(--color-accent-rose);
