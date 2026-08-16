@@ -11,13 +11,32 @@ export default function CertificatePreview({ data, onClose }) {
 
   const verifyUrl = `https://graxion.in/internship/verify/${data.certificateId}`;
 
+  async function waitForImages(container) {
+    const images = Array.from(container.querySelectorAll('img'));
+    await Promise.all(
+      images.map((img) => {
+        if (img.complete && img.naturalWidth > 0) {
+          return Promise.resolve();
+        }
+        return new Promise((resolve) => {
+          img.onload = resolve;
+          img.onerror = resolve;
+        });
+      })
+    );
+  }
+
   async function handleDownload() {
     if (!certRef.current) return;
     try {
+      await waitForImages(certRef.current);
       const canvas = await html2canvas(certRef.current, {
         scale: 3, 
         backgroundColor: '#ffffff',
         useCORS: true,
+        allowTaint: false,
+        imageTimeout: 15000,
+        logging: false,
         windowWidth: 1400,
         windowHeight: 1000,
         onclone: (clonedDoc) => {
@@ -45,10 +64,14 @@ export default function CertificatePreview({ data, onClose }) {
   async function handleDownloadPDF() {
     if (!certRef.current) return;
     try {
+      await waitForImages(certRef.current);
       const canvas = await html2canvas(certRef.current, {
         scale: 3, 
         backgroundColor: '#ffffff',
         useCORS: true,
+        allowTaint: false,
+        imageTimeout: 15000,
+        logging: false,
         windowWidth: 1400,
         windowHeight: 1000,
         onclone: (clonedDoc) => {

@@ -137,18 +137,22 @@
 }
 
 .cert-logo-img-wrapper {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 48px;
-  width: 48px;
 }
 
 .cert-logo-img {
-  height: 100%;
-  width: 100%;
-  object-fit: contain;
   display: block;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  object-position: center;
+  max-width: none;
+  max-height: none;
 }
 
 .cert-logo-text-wrapper {
