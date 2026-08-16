@@ -135,11 +135,21 @@ export default function InternshipForm() {
     }));
   }
 
+  function reindexWeeks(assessments) {
+    return assessments.map((week, index) => {
+      // Only auto-rename if it follows the "Week X" pattern, preserving custom names
+      if (/^Week \d+$/i.test(week.weekName.trim()) || !week.weekName.trim()) {
+        return { ...week, weekName: `Week ${index + 1}` };
+      }
+      return week;
+    });
+  }
+
   function removeWeek(weekIndex) {
-    setFormData((prev) => ({
-      ...prev,
-      assessments: prev.assessments.filter((_, i) => i !== weekIndex)
-    }));
+    setFormData((prev) => {
+      const filtered = prev.assessments.filter((_, i) => i !== weekIndex);
+      return { ...prev, assessments: reindexWeeks(filtered) };
+    });
   }
 
   function updateWeekName(weekIndex, name) {
@@ -154,7 +164,7 @@ export default function InternshipForm() {
     const temp = newAssessments[weekIndex - 1];
     newAssessments[weekIndex - 1] = newAssessments[weekIndex];
     newAssessments[weekIndex] = temp;
-    setFormData({ ...formData, assessments: newAssessments });
+    setFormData({ ...formData, assessments: reindexWeeks(newAssessments) });
   }
 
   function moveWeekDown(weekIndex) {
@@ -163,7 +173,7 @@ export default function InternshipForm() {
     const temp = newAssessments[weekIndex + 1];
     newAssessments[weekIndex + 1] = newAssessments[weekIndex];
     newAssessments[weekIndex] = temp;
-    setFormData({ ...formData, assessments: newAssessments });
+    setFormData({ ...formData, assessments: reindexWeeks(newAssessments) });
   }
 
   function addModule(weekIndex) {
