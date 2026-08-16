@@ -314,8 +314,8 @@ const content = {
         </div>
 
         {/* ================= PAGE 2: CERTIFICATE ================= */}
-        <div className="pr-page page-break" style={{ padding: '80px 0 0 0', overflow: 'hidden' }}>
-          <div style={{ transform: 'scale(0.707)', transformOrigin: 'top left', width: '1123px', height: '794px' }}>
+        <div className="pr-page page-break" style={{ padding: '80px 0 0 0', overflow: 'hidden', display: 'flex', justifyContent: 'center' }}>
+          <div style={{ transform: 'scale(0.707)', transformOrigin: 'top center', width: '1123px', height: '794px', flexShrink: 0 }}>
             <CertificateContent data={data} />
           </div>
         </div>
