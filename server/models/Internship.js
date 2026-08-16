@@ -23,6 +23,22 @@ const internshipSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  rollNumber: {
+    type: String,
+    trim: true,
+  },
+  program: {
+    type: String, // e.g., BCA, BTech
+    trim: true,
+  },
+  semester: {
+    type: String,
+    trim: true,
+  },
+  institution: {
+    type: String,
+    trim: true,
+  },
   photo: {
     type: String, // URL or file path
     default: null,

@@ -17,7 +17,11 @@ import {
   Plus,
   Trash2,
   ChevronUp,
-  ChevronDown
+  ChevronDown,
+  Hash,
+  GraduationCap,
+  BookOpen,
+  Building2
 } from 'lucide-react';
 import './InternshipForm.css';
 
@@ -65,6 +69,10 @@ export default function InternshipForm() {
     studentName: '',
     email: '',
     phone: '',
+    rollNumber: '',
+    program: '',
+    semester: '',
+    institution: '',
     internshipTitle: '',
     domain: '',
     type: 'internship',
@@ -96,6 +104,10 @@ export default function InternshipForm() {
         studentName: d.studentName || '',
         email: d.email || '',
         phone: d.phone || '',
+        rollNumber: d.rollNumber || '',
+        program: d.program || '',
+        semester: d.semester || '',
+        institution: d.institution || '',
         internshipTitle: d.internshipTitle || '',
         domain: d.domain || '',
         type: d.type || 'internship',
@@ -340,6 +352,38 @@ export default function InternshipForm() {
                 onChange={handleChange}
                 placeholder="+91 XXXXX XXXXX"
                 icon={Phone}
+              />
+              <FormField
+                label="Roll Number"
+                name="rollNumber"
+                value={formData.rollNumber}
+                onChange={handleChange}
+                placeholder="e.g., 1241229067"
+                icon={Hash}
+              />
+              <FormField
+                label="Program / Degree"
+                name="program"
+                value={formData.program}
+                onChange={handleChange}
+                placeholder="e.g., BCA - 4 Year"
+                icon={GraduationCap}
+              />
+              <FormField
+                label="Semester"
+                name="semester"
+                value={formData.semester}
+                onChange={handleChange}
+                placeholder="e.g., IV"
+                icon={BookOpen}
+              />
+              <FormField
+                label="Institution / College"
+                name="institution"
+                value={formData.institution}
+                onChange={handleChange}
+                placeholder="e.g., Gaur Brahman Degree College, Rohtak"
+                icon={Building2}
               />
               <FormField
                 label="Record Type"

@@ -4,7 +4,8 @@ import { useAuth } from '../../AdminAuthContext';
 import { internshipAPI } from '../../../utils/api';
 import CertificatePreview from './CertificatePreview';
 import ReportCardPreview from './ReportCardPreview';
-import Modal from '../../components/Modal';
+import ProjectReportPreview from './ProjectReportPreview';
+import Modal, { ConfirmModal } from '../../components/Modal';
 import {
   ChevronLeft,
   Edit,
@@ -29,6 +30,8 @@ export default function InternshipDetail() {
   const [loading, setLoading] = useState(true);
   const [showCertificate, setShowCertificate] = useState(false);
   const [showReportCard, setShowReportCard] = useState(false);
+  const [showProjectReport, setShowProjectReport] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [issuingCert, setIssuingCert] = useState(false);
 
   useEffect(() => {
@@ -105,14 +108,21 @@ export default function InternshipDetail() {
             Edit
           </button>
           {data.certificateIssued ? (
-            <>
-              <button
-                className="admin-btn-secondary"
-                onClick={() => setShowReportCard(true)}
-              >
-                <FileText size={16} />
-                Report Card
-              </button>
+            <div className="id-header-actions">
+            <button
+              className="admin-btn-secondary"
+              onClick={() => setShowProjectReport(true)}
+            >
+              <FileText size={16} />
+              View Project Report
+            </button>
+            <button
+              className="admin-btn-secondary"
+              onClick={() => setShowReportCard(true)}
+            >
+              <FileText size={16} />
+              View Report Card
+            </button>
               <button
                 className="admin-btn-primary"
                 onClick={() => setShowCertificate(true)}
@@ -120,7 +130,7 @@ export default function InternshipDetail() {
                 <Download size={16} />
                 Certificate
               </button>
-            </>
+            </div>
           ) : (
             <button
               className="admin-btn-primary"
@@ -295,6 +305,17 @@ export default function InternshipDetail() {
         noPadding
       >
         <ReportCardPreview data={data} />
+      </Modal>
+
+      {/* Project Report Modal */}
+      <Modal
+        isOpen={showProjectReport}
+        onClose={() => setShowProjectReport(false)}
+        title="Project Report Preview"
+        size="xl"
+        noPadding
+      >
+        <ProjectReportPreview data={data} />
       </Modal>
     </div>
   );

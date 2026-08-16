@@ -1,0 +1,185 @@
+/* ==========================================================
+   GRAXION — Project Report Preview CSS
+   ========================================================== */
+
+.pr-container {
+  background: #ffffff;
+  color: #000000;
+  font-family: "Times New Roman", Times, serif;
+  line-height: 1.6;
+  width: 794px; /* A4 width in pixels at 96dpi */
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.pr-page {
+  width: 794px;
+  height: 1123px; /* A4 height in pixels at 96dpi */
+  padding: 80px 70px;
+  box-sizing: border-box;
+  background: #ffffff;
+  position: relative;
+}
+
+/* For printing, ensure each page breaks cleanly */
+@media print {
+  .page-break {
+    page-break-after: always;
+  }
+}
+
+.pr-center-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.pr-main-title {
+  font-size: 28px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+.pr-domain {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.pr-tech {
+  font-size: 16px;
+  font-weight: normal;
+  font-style: italic;
+  margin-bottom: 60px;
+}
+
+.pr-submitted-by {
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: 500px;
+  text-align: left;
+}
+
+.pr-submitted-by h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  text-decoration: underline;
+}
+
+.pr-table-info {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pr-table-info td {
+  padding: 6px 0;
+  vertical-align: top;
+  font-size: 15px;
+}
+
+.pr-table-info td:first-child {
+  width: 45%;
+}
+
+.pr-verification {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.pr-verification h4 {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.pr-verification a {
+  color: #0000ee;
+  text-decoration: none;
+}
+
+.pr-submitted-to {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.pr-submitted-to h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.pr-month-year {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+/* Sections */
+.pr-section-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #000;
+  padding-bottom: 5px;
+}
+
+.pr-subsection-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.pr-text {
+  font-size: 15px;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+.pr-signature-block {
+  margin-top: 50px;
+  text-align: right;
+}
+
+.pr-signature-block p {
+  margin: 5px 0;
+}
+
+.pr-signature-grid {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 60px;
+}
+
+.pr-list {
+  padding-left: 25px;
+  margin-bottom: 20px;
+}
+
+.pr-list li {
+  font-size: 15px;
+  margin-bottom: 10px;
+  text-align: justify;
+}
+
+.pr-verification-refs {
+  margin-top: 40px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+}
+
+.pr-verification-refs p {
+  margin: 0 0 10px 0;
+  font-weight: bold;
+}
+
+.pr-verification-refs a {
+  color: #0000ee;
+  font-size: 14px;
+  word-break: break-all;
+}
