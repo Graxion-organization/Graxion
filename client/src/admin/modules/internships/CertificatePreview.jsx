@@ -1,7 +1,8 @@
 import { useRef } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import html2canvas from 'html2canvas';
-import { Download, Printer, X } from 'lucide-react';
+import jsPDF from 'jspdf';
+import { Download, Printer, X, FileText } from 'lucide-react';
 import ResponsiveDocumentViewer from './ResponsiveDocumentViewer';
 import './CertificatePreview.css';
 
@@ -43,6 +44,46 @@ export default function CertificatePreview({ data, onClose }) {
     } catch (error) {
       console.error('Download failed:', error);
       // Ensure we restore transform even on error
+      const scaledContainer = certRef.current?.closest('.rdv-scaled-inner');
+      if (scaledContainer && scaledContainer.style.transform === 'none') {
+        scaledContainer.style.transform = '';
+      }
+    }
+  }
+
+  async function handleDownloadPDF() {
+    if (!certRef.current) return;
+    try {
+      const scaledContainer = certRef.current.closest('.rdv-scaled-inner');
+      let originalTransform = '';
+      if (scaledContainer) {
+        originalTransform = scaledContainer.style.transform;
+        scaledContainer.style.transform = 'none';
+      }
+
+      await new Promise(resolve => setTimeout(resolve, 50));
+
+      const canvas = await html2canvas(certRef.current, {
+        scale: 3, 
+        backgroundColor: '#ffffff',
+        useCORS: true,
+      });
+
+      if (scaledContainer) {
+        scaledContainer.style.transform = originalTransform;
+      }
+
+      const imgData = canvas.toDataURL('image/jpeg', 1.0);
+      const pdf = new jsPDF({
+        orientation: 'landscape',
+        unit: 'mm',
+        format: 'a4'
+      });
+      pdf.addImage(imgData, 'JPEG', 0, 0, 297, 210);
+      pdf.save(`Graxion-Certificate-${data.certificateId}.pdf`);
+      
+    } catch (error) {
+      console.error('PDF Download failed:', error);
       const scaledContainer = certRef.current?.closest('.rdv-scaled-inner');
       if (scaledContainer && scaledContainer.style.transform === 'none') {
         scaledContainer.style.transform = '';
@@ -135,6 +176,10 @@ export default function CertificatePreview({ data, onClose }) {
           <button className="admin-btn-secondary verify-btn-doc" onClick={handleDownload}>
             <Download size={16} />
             Download PNG
+          </button>
+          <button className="admin-btn-secondary verify-btn-doc" onClick={handleDownloadPDF}>
+            <FileText size={16} />
+            Download PDF
           </button>
           <button className="admin-btn-secondary verify-btn-doc" onClick={handlePrint}>
             <Printer size={16} />
