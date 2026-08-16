@@ -22,10 +22,14 @@
   position: relative;
 }
 
-/* For printing, ensure each page breaks cleanly */
+/* For printing, ensure each page breaks cleanly and text is black */
 @media print {
   .page-break {
     page-break-after: always;
+  }
+  .pr-container,
+  .pr-container * {
+    color: #000000 !important;
   }
 }
 

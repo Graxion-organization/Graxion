@@ -308,14 +308,14 @@ const content = {
 
           <div className="pr-submitted-to">
             <h4>Submitted to:</h4>
-            <p>{data.mentor || '______________'}</p>
+            <p>___________________</p>
             <p className="pr-month-year">[{monthYear}]</p>
           </div>
         </div>
 
         {/* ================= PAGE 2: CERTIFICATE ================= */}
-        <div className="pr-page page-break" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-          <div style={{ transform: 'scale(0.707)', transformOrigin: 'center center', width: '1123px', height: '794px' }}>
+        <div className="pr-page page-break" style={{ padding: '80px 0 0 0', display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+          <div style={{ transform: 'scale(0.707)', transformOrigin: 'top center', width: '1123px', height: '794px' }}>
             <CertificateContent data={data} />
           </div>
         </div>
