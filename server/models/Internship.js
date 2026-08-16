@@ -158,6 +158,7 @@ const internshipSchema = new mongoose.Schema({
 
   // Project Report Content
   projectReport: {
+    certificateText: { type: String, trim: true },
     techStack: { type: String, trim: true },
     intro: { type: String, trim: true },
     objectives: { type: String, trim: true },

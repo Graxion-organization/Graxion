@@ -221,36 +221,37 @@ export default function ProjectReportPreview({ data, onClose }) {
         'Enhanced communication, teamwork, documentation, and time management skills while working in a professional environment.',
         'Successfully applied classroom knowledge to real-world projects.'
       ],
-      overallOutcomes: `The internship provided valuable industry exposure and strengthened both my technical and professional capabilities. Through hands-on development in ${domain}, I developed practical skills and gained confidence in building professional applications. The internship prepared me to contribute effectively to modern software development projects and established a strong foundation for my future career.`,
-      references: [
-        'Official Technology Documentation.',
-        'Git Official Documentation.',
-        'GitHub Documentation.',
-        'Training material and practical assignments provided by Graxion.',
-        `Internet resources, developer blogs, and educational platforms related to ${domain}.`
-      ]
-    };
+    overallOutcomes: `The internship provided valuable industry exposure and strengthened both my technical and professional capabilities. Through hands-on development in ${domain}, I developed practical skills and gained confidence in building professional applications. The internship prepared me to contribute effectively to modern software development projects and established a strong foundation for my future career.`,
+    references: [
+      'Official Technology Documentation.',
+      'Git Official Documentation.',
+      'GitHub Documentation.',
+      'Training material and practical assignments provided by Graxion.',
+      `Internet resources, developer blogs, and educational platforms related to ${domain}.`
+    ]
   };
+};
 
-  const parseLines = (customText, defaultArray) => {
-    if (customText && customText.trim() !== '') {
-      return customText.split('\n').filter(line => line.trim() !== '');
-    }
-    return defaultArray;
-  };
+const parseLines = (customText, defaultArray) => {
+  if (customText && customText.trim() !== '') {
+    return customText.split('\n').filter(line => line.trim() !== '');
+  }
+  return defaultArray;
+};
 
-  const dbReport = data.projectReport || {};
-  const defaultContent = getDomainSpecificContent(data.domain || 'Backend Development');
+const dbReport = data.projectReport || {};
+const defaultContent = getDomainSpecificContent(data.domain || 'Backend Development');
 
-  const content = {
-    techStack: (dbReport.techStack && dbReport.techStack.trim() !== '') ? dbReport.techStack : defaultContent.techStack,
-    intro: parseLines(dbReport.intro, defaultContent.intro),
-    objectives: parseLines(dbReport.objectives, defaultContent.objectives),
-    methodology: parseLines(dbReport.methodology, defaultContent.methodology),
-    outcomes: parseLines(dbReport.outcomes, defaultContent.outcomes),
-    overallOutcomes: (dbReport.overallOutcomes && dbReport.overallOutcomes.trim() !== '') ? dbReport.overallOutcomes : defaultContent.overallOutcomes,
-    references: parseLines(dbReport.references, defaultContent.references),
-  };
+const content = {
+  certificateText: (dbReport.certificateText && dbReport.certificateText.trim() !== '') 
+    ? dbReport.certificateText 
+    : `This is to certify that ${data.studentName} has successfully completed an internship program in ${data.domain || 'Backend Development'} at Graxion. The intern has demonstrated excellent technical skills and professional conduct during the internship period from ${startDate} to ${endDate}.`,
+  intro: parseLines(dbReport.intro, defaultContent.intro),
+  objectives: parseLines(dbReport.objectives, defaultContent.objectives),
+  methodology: parseLines(dbReport.methodology, defaultContent.methodology),
+  outcomes: parseLines(dbReport.outcomes, defaultContent.outcomes),
+  references: parseLines(dbReport.references, defaultContent.references),
+};
   const studentIdStr = data.studentId || 'GRX-STD-XXXXXX';
   const certIdStr = data.certificateId || 'GRX-INT-XXXXXX';
 
@@ -317,10 +318,23 @@ export default function ProjectReportPreview({ data, onClose }) {
 
         {/* ================= PAGE 2: CERTIFICATE ================= */}
         <div className="pr-page page-break">
-          <h2 className="pr-section-title">2. Certificate</h2>
-          <p className="pr-text" style={{ marginTop: '40px', fontStyle: 'italic', color: '#666' }}>
-            [Attach or print the official Graxion Internship Certificate here]
+          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+            <img src="/logo.png" alt="Graxion Logo" style={{ width: '200px' }} />
+          </div>
+          <h2 className="pr-section-title" style={{ textAlign: 'center' }}>CERTIFICATE</h2>
+          <p className="pr-text" style={{ marginTop: '40px', lineHeight: '2' }}>
+            {content.certificateText}
           </p>
+          <div className="pr-signature-grid" style={{ marginTop: '100px' }}>
+            <div>
+              <p>Date: {issueDate}</p>
+            </div>
+            <div style={{ textAlign: 'right' }}>
+              <p>___________________</p>
+              <p><strong>Authorized Signatory</strong></p>
+              <p>Graxion</p>
+            </div>
+          </div>
         </div>
 
         {/* ================= PAGE 4: INTRODUCTION ================= */}
@@ -359,9 +373,6 @@ export default function ProjectReportPreview({ data, onClose }) {
               <li key={idx}>{outcome}</li>
             ))}
           </ul>
-          
-          <h3 className="pr-subsection-title">Overall Outcomes</h3>
-          <p className="pr-text">{content.overallOutcomes}</p>
         </div>
 
         {/* ================= PAGE 7: REFERENCES ================= */}

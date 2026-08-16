@@ -91,12 +91,12 @@ export default function InternshipForm() {
     overallRemarks: '',
     assessments: [],
     projectReport: {
+      certificateText: '',
       techStack: '',
       intro: '',
       objectives: '',
       methodology: '',
       outcomes: '',
-      overallOutcomes: '',
       references: ''
     }
   });
@@ -135,7 +135,7 @@ export default function InternshipForm() {
         overallRemarks: d.overallRemarks || '',
         assessments: d.assessments || [],
         projectReport: d.projectReport || {
-          techStack: '', intro: '', objectives: '', methodology: '', outcomes: '', overallOutcomes: '', references: ''
+          certificateText: '', techStack: '', intro: '', objectives: '', methodology: '', outcomes: '', references: ''
         }
       });
     } catch (error) {
@@ -655,6 +655,16 @@ export default function InternshipForm() {
             
             <div className="if-grid full">
               <FormField
+                label="Certificate Text"
+                name="projectReport.certificateText"
+                type="textarea"
+                value={formData.projectReport?.certificateText || ''}
+                onChange={handleChange}
+                placeholder="Enter certificate text here..."
+                icon={FileCode}
+                rows={4}
+              />
+              <FormField
                 label="Introduction (Separate paragraphs with new lines)"
                 name="projectReport.intro"
                 type="textarea"
@@ -692,16 +702,6 @@ export default function InternshipForm() {
                 onChange={handleChange}
                 placeholder="Enter outcomes here..."
                 icon={List}
-                rows={4}
-              />
-              <FormField
-                label="Overall Outcomes (Paragraph)"
-                name="projectReport.overallOutcomes"
-                type="textarea"
-                value={formData.projectReport?.overallOutcomes || ''}
-                onChange={handleChange}
-                placeholder="Enter overall outcomes here..."
-                icon={AlignLeft}
                 rows={4}
               />
               <FormField
