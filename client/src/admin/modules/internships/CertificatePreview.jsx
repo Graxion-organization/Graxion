@@ -164,14 +164,9 @@ export default function CertificatePreview({ data, onClose }) {
 
         <div className="cert-bottom">
           <div className="cert-signature">
-            {/* Seal - positioned above signature */}
-            <div className="cert-seal">
-              <div className="cert-seal-inner">
-                <span className="cert-seal-text">VERIFIED</span>
-                <span className="cert-seal-icon">G</span>
-              </div>
-            </div>
-            <p className="cert-sig-name">Issued by</p>
+            <div className="cert-cursive-sig">Graxion Team</div>
+            <div className="cert-signature-line"></div>
+            <p className="cert-sig-name">Authorized Signatory</p>
             <p className="cert-sig-title">Graxion</p>
           </div>
 

@@ -278,44 +278,21 @@
   line-height: 1.2;
 }
 
-/* Premium Gold Embossed Seal */
-.cert-seal {
-  position: relative;
-  width: 75px;
-  height: 75px;
-  margin-bottom: 8px;
-  flex-shrink: 0;
-}
-
-.cert-seal-inner {
-  width: 100%;
-  height: 100%;
-  border: 3px double #bf953f; /* Gold double border */
-  background: radial-gradient(circle, #fcf6ba 0%, #bf953f 30%, #fbf5b7 60%, #aa771c 85%, #bf953f 100%);
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 15px rgba(191, 149, 63, 0.3);
-  box-sizing: border-box;
-}
-
-.cert-seal-text {
-  font-size: 0.45rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #5d4010; /* Dark gold/bronze color */
-  font-weight: 800;
+/* Signature Line and Text */
+.cert-cursive-sig {
+  font-family: 'Brush Script MT', 'Lucida Handwriting', 'Segoe Script', cursive;
+  font-size: 2.2rem;
+  color: #0a0e1a;
   line-height: 1;
-  margin-bottom: 1px;
+  margin-bottom: 4px;
+  opacity: 0.8;
 }
 
-.cert-seal-icon {
-  font-size: 1.3rem;
-  font-weight: 900;
-  color: #5d4010;
-  line-height: 1;
+.cert-signature-line {
+  width: 140px;
+  height: 1px;
+  background-color: #9ca3af;
+  margin: 6px 0 8px 0;
 }
 
 /* QR Code */
