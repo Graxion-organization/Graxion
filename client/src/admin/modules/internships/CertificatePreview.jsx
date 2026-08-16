@@ -14,27 +14,43 @@ export default function CertificatePreview({ data, onClose }) {
   async function handleDownload() {
     if (!certRef.current) return;
     try {
-      // FIX for text squishing: Temporarily remove scaling from the ResponsiveDocumentViewer
-      // html2canvas miscalculates font tracking/widths when the parent has a CSS transform scale applied.
       const scaledContainer = certRef.current.closest('.rdv-scaled-inner');
       let originalTransform = '';
+      let originalPosition = '';
+      let originalTop = '';
+      let originalLeft = '';
+      let originalZIndex = '';
+
       if (scaledContainer) {
         originalTransform = scaledContainer.style.transform;
+        originalPosition = scaledContainer.style.position;
+        originalTop = scaledContainer.style.top;
+        originalLeft = scaledContainer.style.left;
+        originalZIndex = scaledContainer.style.zIndex;
+
         scaledContainer.style.transform = 'none';
+        scaledContainer.style.position = 'fixed';
+        scaledContainer.style.top = '0';
+        scaledContainer.style.left = '0';
+        scaledContainer.style.zIndex = '9999';
       }
 
-      // Small delay to allow the browser to recalculate unscaled layout
       await new Promise(resolve => setTimeout(resolve, 50));
 
       const canvas = await html2canvas(certRef.current, {
-        scale: 3, // 300 DPI Export Scale
+        scale: 3, 
         backgroundColor: '#ffffff',
         useCORS: true,
+        scrollX: 0,
+        scrollY: 0
       });
 
-      // Restore transform immediately after capture
       if (scaledContainer) {
         scaledContainer.style.transform = originalTransform;
+        scaledContainer.style.position = originalPosition;
+        scaledContainer.style.top = originalTop;
+        scaledContainer.style.left = originalLeft;
+        scaledContainer.style.zIndex = originalZIndex;
       }
 
       const link = document.createElement('a');
@@ -43,10 +59,10 @@ export default function CertificatePreview({ data, onClose }) {
       link.click();
     } catch (error) {
       console.error('Download failed:', error);
-      // Ensure we restore transform even on error
       const scaledContainer = certRef.current?.closest('.rdv-scaled-inner');
       if (scaledContainer && scaledContainer.style.transform === 'none') {
         scaledContainer.style.transform = '';
+        scaledContainer.style.position = '';
       }
     }
   }
@@ -56,9 +72,24 @@ export default function CertificatePreview({ data, onClose }) {
     try {
       const scaledContainer = certRef.current.closest('.rdv-scaled-inner');
       let originalTransform = '';
+      let originalPosition = '';
+      let originalTop = '';
+      let originalLeft = '';
+      let originalZIndex = '';
+
       if (scaledContainer) {
         originalTransform = scaledContainer.style.transform;
+        originalPosition = scaledContainer.style.position;
+        originalTop = scaledContainer.style.top;
+        originalLeft = scaledContainer.style.left;
+        originalZIndex = scaledContainer.style.zIndex;
+
+        // Force to top-left of viewport to prevent scroll-cropping during capture
         scaledContainer.style.transform = 'none';
+        scaledContainer.style.position = 'fixed';
+        scaledContainer.style.top = '0';
+        scaledContainer.style.left = '0';
+        scaledContainer.style.zIndex = '9999';
       }
 
       await new Promise(resolve => setTimeout(resolve, 50));
@@ -67,10 +98,16 @@ export default function CertificatePreview({ data, onClose }) {
         scale: 3, 
         backgroundColor: '#ffffff',
         useCORS: true,
+        scrollX: 0,
+        scrollY: 0
       });
 
       if (scaledContainer) {
         scaledContainer.style.transform = originalTransform;
+        scaledContainer.style.position = originalPosition;
+        scaledContainer.style.top = originalTop;
+        scaledContainer.style.left = originalLeft;
+        scaledContainer.style.zIndex = originalZIndex;
       }
 
       const imgData = canvas.toDataURL('image/jpeg', 1.0);
@@ -87,6 +124,7 @@ export default function CertificatePreview({ data, onClose }) {
       const scaledContainer = certRef.current?.closest('.rdv-scaled-inner');
       if (scaledContainer && scaledContainer.style.transform === 'none') {
         scaledContainer.style.transform = '';
+        scaledContainer.style.position = '';
       }
     }
   }
@@ -268,12 +306,6 @@ export default function CertificatePreview({ data, onClose }) {
                 bgColor="transparent"
                 fgColor="#00d4ff"
                 level="H"
-                imageSettings={{
-                  src: "/logo.png",
-                  height: 16,
-                  width: 16,
-                  excavate: true
-                }}
               />
             </div>
             <p className="cert-qr-label">Scan to Verify</p>
