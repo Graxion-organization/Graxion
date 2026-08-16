@@ -283,7 +283,6 @@ export default function ProjectReportPreview({ data, onClose }) {
         <div className="pr-page page-break pr-center-page">
           <h1 className="pr-main-title">INTERNSHIP REPORT</h1>
           <h2 className="pr-domain">{data.domain || 'Backend Development'}</h2>
-          <h3 className="pr-tech">using {content.techStack}</h3>
           
           <div className="pr-submitted-by">
             <h4>Submitted By:</h4>

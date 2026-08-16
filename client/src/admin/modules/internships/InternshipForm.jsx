@@ -650,18 +650,7 @@ export default function InternshipForm() {
           <div className="if-section">
             <div className="if-section-header">
               <h3><FileCode size={20} /> Project Report Content</h3>
-              <p>Customize the 7 pages of the Project Report. Leave empty to use the system defaults.</p>
-            </div>
-            
-            <div className="if-grid">
-              <FormField
-                label="Tech Stack (e.g. Node.js, Express.js & MongoDB)"
-                name="projectReport.techStack"
-                value={formData.projectReport?.techStack || ''}
-                onChange={handleChange}
-                placeholder="Overrides the default tech stack text"
-                icon={Hash}
-              />
+              <p>Customize the pages of the Project Report. Leave empty to use the system defaults.</p>
             </div>
             
             <div className="if-grid full">
